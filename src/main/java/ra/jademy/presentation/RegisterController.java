@@ -41,8 +41,8 @@ public class RegisterController {
 			mv.addObject("errorMessage", "Parolele nu se potrivesc");
 			return mv;
 		}
-		UserService userService = new UserService();
-		if(userService.getUser(userName)!= null  ){
+		//UserService userService = new UserService();
+		if((new UserService()).getUser(userName)!= null  ){
 			ModelAndView mv = new ModelAndView("registerMenu");
 			mv.addObject("errorMessage", "Userul exista deja" );
 			return mv;
@@ -51,7 +51,7 @@ public class RegisterController {
 		
 		sendMail();
 		
-		User savedUser =  userService.saveUser(new User(userName , password, emailAddress));
+		User savedUser =  (new UserService()).saveUser(new User(userName , password, emailAddress));
 		
 		ModelAndView mv = new ModelAndView("login", "errorMessage", "Userul a fost creat cu succes.");
 		return mv;
