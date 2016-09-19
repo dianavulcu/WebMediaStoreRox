@@ -9,7 +9,15 @@
 </head>
 <body>
 <c:forEach items="${aList}" var="aMedia"> 
-${aMedia.title}
+<div class="row">
+	<div class ="col-xs-2">${aMedia.title}</div>
+	<div class ="col-xs-2">${aMedia.price}</div>
+	<div class ="col-xs-2">${aMedia.genre}</div>
+	<div class ="col-xs-4">${aMedia.description}</div>
+	<div class ="col-xs-1">${aMedia.description}</div>
+</div>
+<input type="submit" value="Adauga in cos"/>
+
 </c:forEach>
 </body>
 </html>

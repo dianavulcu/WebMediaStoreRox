@@ -15,7 +15,7 @@ public class CD extends Media {
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return null;
+		return artist;
 	}
 	
 	 public static class Builder {
