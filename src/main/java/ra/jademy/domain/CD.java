@@ -5,7 +5,7 @@ public class CD extends Media {
 	
 	public CD(String title, double price, String code, Genre genre, String artist) {
 		super(title, price, code, genre);
-		this.artist = artist + " is the artist";
+		this.artist = artist + " is the perfect artist";
 	}
 
 	public String getArtist() {
