@@ -5,11 +5,7 @@ public class CD extends Media {
 	
 	public CD(String title, double price, String code, Genre genre, String artist) {
 		super(title, price, code, genre);
-<<<<<<< HEAD
-		this.artist = artist + " is the perfect artist";
-=======
-		this.artist = artist + " is the worst   artist";
->>>>>>> origin/master
+		this.artist = artist;
 	}
 
 	public String getArtist() {
@@ -19,7 +15,7 @@ public class CD extends Media {
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return null;
+		return artist;
 	}
 	
 	 public static class Builder {
