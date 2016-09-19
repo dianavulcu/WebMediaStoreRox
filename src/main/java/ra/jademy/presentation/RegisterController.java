@@ -61,3 +61,5 @@ public class RegisterController {
 		mailService.sendMail("cui_trimite@yahoo.com", "Subiect test", "Textul", false);
 	}
 }
+
+
