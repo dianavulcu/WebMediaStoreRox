@@ -10,7 +10,7 @@
 </head>
 <body>
 <form action="/recoverPassword" method="POST">
-<h3>Esti logat cu userul:</h3> ${userName}
+<h3>Esti logat cu userul: </h3> ${userName}
 <h3>Password:</h3>
 <input type="password" name="password"/><br/><br/>
 <input type="password" name="repeatPassword"/><br/><br/>
