@@ -49,7 +49,7 @@ public class RegisterController {
 			
 		}
 		
-		sendMail();
+	
 		
 		User savedUser =  (new UserService()).saveUser(new User(userName , password, emailAddress));
 		
@@ -57,9 +57,6 @@ public class RegisterController {
 		return mv;
 	}
 
-	private void sendMail() {
-		mailService.sendMail("cui_trimite@yahoo.com", "Subiect test", "Textul", false);
-	}
 }
 
 
