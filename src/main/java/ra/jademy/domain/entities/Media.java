@@ -1,4 +1,4 @@
-package ra.jademy.domain;
+package ra.jademy.domain.entities;
 
 public abstract class Media {
 	private String title;

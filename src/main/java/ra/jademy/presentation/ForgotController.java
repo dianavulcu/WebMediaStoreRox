@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import ra.jademy.domain.MailService;
-import ra.jademy.domain.User;
-import ra.jademy.domain.UserService;
+import ra.jademy.domain.service.MailService;
+import ra.jademy.domain.entities.User;
+import ra.jademy.domain.service.UserService;
 
 @Controller
 public class ForgotController {

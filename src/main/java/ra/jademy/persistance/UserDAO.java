@@ -9,7 +9,7 @@ import java.util.Enumeration;
 import java.util.Properties;
 import java.util.TreeSet;
 
-import ra.jademy.domain.User;
+import ra.jademy.domain.entities.User;
 
 public class UserDAO {
 

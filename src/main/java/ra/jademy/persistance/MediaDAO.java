@@ -6,14 +6,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.TreeSet;
 
-import ra.jademy.domain.CD;
-import ra.jademy.domain.Genre;
-import ra.jademy.domain.Media;
-import ra.jademy.domain.ProductType;
-import ra.jademy.domain.User;
+import ra.jademy.domain.entities.CD;
+import ra.jademy.domain.entities.Genre;
+import ra.jademy.domain.entities.Media;
+import ra.jademy.domain.entities.ProductType;
+import ra.jademy.domain.entities.User;
 
 public class MediaDAO {
 	private Properties importFile;
@@ -57,5 +58,15 @@ public class MediaDAO {
 			aList.add(cd);
 		}
 		return aList;
+	}
+	public Media getByCode(String productCode){
+		int i=0;
+		for (Entry pEntry:importFile.entrySet()){
+			i++;
+			if (pEntry.getValue().equals(productCode) && ((String)pEntry.getKey()).endsWith(".code")){
+				
+			}
+		}
+		return null;
 	}
 }

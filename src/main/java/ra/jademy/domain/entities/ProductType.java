@@ -1,4 +1,4 @@
-package ra.jademy.domain;
+package ra.jademy.domain.entities;
 
 public enum ProductType {
 	CD, DVD, BOOK

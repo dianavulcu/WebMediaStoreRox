@@ -2,6 +2,7 @@
 	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,9 +33,10 @@
 				</div>
 			</div>
 			<input type="hidden" value="${aMedia.code}" name="productCode"/>
+			<input type="hidden" value="${productType}" name="productType"/>
 		</form>
-
-
 	</c:forEach>
+	<h6>Avem ${fn:length(cart.cartItems)} produse in shopping cart</h6>
+			
 </body>
 </html>
