@@ -49,7 +49,7 @@ public class RegisterController {
 			
 		}
 		
-		sendMail();
+		//sendMail();
 		
 		User savedUser =  (new UserService()).saveUser(new User(userName , password, emailAddress));
 		
