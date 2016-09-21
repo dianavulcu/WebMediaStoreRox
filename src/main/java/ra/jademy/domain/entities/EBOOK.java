@@ -5,7 +5,7 @@ import ra.jademy.domain.entities.EBOOK.Builder;
 public class EBOOK extends Media{
 	private String author;
 
-	public EBOOK(String title, double price, String code, Genre genre, String autor) {
+	public EBOOK(String title, double price, String code, Genre genre, String author) {
 		super(title, price, code, genre);
 		this.author = author;
 		// TODO Auto-generated constructor stub

@@ -58,10 +58,21 @@ public class MediaDAO {
 			String dbDirectors = importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].directors");
 			String dbProductionLabels = importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].productionLabels");
 			String dbAuthor = importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].author");
-			CD cd = new CD.Builder().title(dbTitle).artist(dbArtist).price(dbPrice).code(dbCode).genre(dbGenre).build();
-			DVD dvd = new DVD.Builder().title(dbTitle).directors(dbDirectors).productionLabel(dbProductionLabels).price(dbPrice).code(dbCode).genre(dbGenre).build();
-			EBOOK ebook = new EBOOK.Builder().title(dbTitle).author(dbAuthor).price(dbPrice).code(dbCode).genre(dbGenre).build();
-			aList.add(ebook);
+			Media media = null;
+			switch(productType){
+			case CD:
+				media = new CD.Builder().title(dbTitle).artist(dbArtist).price(dbPrice).code(dbCode).genre(dbGenre).build();
+			
+				break;
+			case DVD:
+				media  = new DVD.Builder().title(dbTitle).directors(dbDirectors).productionLabel(dbProductionLabels).price(dbPrice).code(dbCode).genre(dbGenre).build();
+				
+				break;
+			case EBOOK:
+				media = new EBOOK.Builder().title(dbTitle).author(dbAuthor).price(dbPrice).code(dbCode).genre(dbGenre).build();
+							
+			}
+			aList.add(media);
 		}
 		return aList;
 	}

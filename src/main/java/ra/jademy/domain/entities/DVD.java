@@ -24,7 +24,7 @@ public class DVD extends Media{
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return null;
+		return directors;
 	}
 	 public static class Builder {
 		 String title;
@@ -55,7 +55,7 @@ public class DVD extends Media{
 			 return this;
 		 }
 		 public Builder productionLabel(String productionLabel) {
-			 this.directors= productionLabel;
+			 this.productionLabel = productionLabel;
 			 return this;
 		 }
 		
