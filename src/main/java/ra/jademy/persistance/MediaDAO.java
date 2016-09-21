@@ -11,10 +11,11 @@ import java.util.Properties;
 import java.util.TreeSet;
 
 import ra.jademy.domain.entities.CD;
+import ra.jademy.domain.entities.DVD;
+import ra.jademy.domain.entities.EBOOK;
 import ra.jademy.domain.entities.Genre;
 import ra.jademy.domain.entities.Media;
 import ra.jademy.domain.entities.ProductType;
-import ra.jademy.domain.entities.User;
 
 public class MediaDAO {
 	private Properties importFile;
@@ -54,7 +55,12 @@ public class MediaDAO {
 			Genre dbGenre = Genre
 					.valueOf(importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].genre"));
 			String dbArtist = importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].artist");
+			String dbDirectors = importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].directors");
+			String dbProductionLabels = importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].productionLabels");
+			String dbAuthor = importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].author");
 			CD cd = new CD.Builder().title(dbTitle).artist(dbArtist).price(dbPrice).code(dbCode).genre(dbGenre).build();
+			DVD dvd = new DVD.Builder().title(dbTitle).directors(dbDirectors).productionLabel(dbProductionLabels).price(dbPrice).code(dbCode).genre(dbGenre).build();
+			EBOOK ebook = new EBOOK.Builder().title(dbTitle).author(dbAuthor).price(dbPrice).code(dbCode).genre(dbGenre).build();
 			aList.add(cd);
 		}
 		return aList;

@@ -1,14 +1,14 @@
 package ra.jademy.presentation;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import ra.jademy.domain.entities.CartItem;
+
 import ra.jademy.domain.entities.Media;
 import ra.jademy.domain.entities.ProductType;
 import ra.jademy.domain.entities.ShoppingCart;
-
 import ra.jademy.domain.service.MediaService;
 
 @Controller

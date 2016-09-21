@@ -1,5 +1,7 @@
 package ra.jademy.domain.entities;
 
+import ra.jademy.domain.entities.CD.Builder;
+
 public class CD extends Media {
 	private String artist;
 	
