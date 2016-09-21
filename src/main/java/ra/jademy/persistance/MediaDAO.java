@@ -61,7 +61,7 @@ public class MediaDAO {
 			CD cd = new CD.Builder().title(dbTitle).artist(dbArtist).price(dbPrice).code(dbCode).genre(dbGenre).build();
 			DVD dvd = new DVD.Builder().title(dbTitle).directors(dbDirectors).productionLabel(dbProductionLabels).price(dbPrice).code(dbCode).genre(dbGenre).build();
 			EBOOK ebook = new EBOOK.Builder().title(dbTitle).author(dbAuthor).price(dbPrice).code(dbCode).genre(dbGenre).build();
-			aList.add(cd);
+			aList.add(ebook);
 		}
 		return aList;
 	}
