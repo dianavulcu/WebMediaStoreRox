@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Map.Entry;
 
 import ro.jademy.domain.entities.CD;
 import ro.jademy.domain.entities.DVD;
@@ -18,17 +17,6 @@ import ro.jademy.domain.entities.ProductType;
 import java.util.Properties;
 import java.util.TreeSet;
 
-<<<<<<< HEAD:src/main/java/ro/jademy/persistance/MediaDAO.java
-=======
-import ra.jademy.domain.entities.CD;
-import ra.jademy.domain.entities.DVD;
-import ra.jademy.domain.entities.EBOOK;
-import ra.jademy.domain.entities.Genre;
-import ra.jademy.domain.entities.Media;
-import ra.jademy.domain.entities.ProductType;
-import ra.jademy.domain.entities.User;
-
->>>>>>> origin/master:src/main/java/ra/jademy/persistance/MediaDAO.java
 public class MediaDAO {
 	private Properties importFile;
 	private static MediaDAO soleInstance = new MediaDAO();
@@ -95,8 +83,6 @@ public class MediaDAO {
 		return aList;
 	}
 
-<<<<<<< HEAD:src/main/java/ro/jademy/persistance/MediaDAO.java
-=======
 	public Media getProductbyCode(ProductType productType, String productCode) {
 		// int i=0;
 		// for (Entry pEntry:importFile.entrySet()){
@@ -119,7 +105,7 @@ public class MediaDAO {
 				String dbTitle = importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].title");
 				Double dbPrice = Double
 						.valueOf(importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].price"));
-				Genre dbGenre = Genre
+				MediaGenre dbGenre = MediaGenre
 						.valueOf(importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].genre"));
 				switch (productType) {
 				case CD:
@@ -144,5 +130,4 @@ public class MediaDAO {
 			}
 		}
 	}
->>>>>>> origin/master:src/main/java/ra/jademy/persistance/MediaDAO.java
 }
