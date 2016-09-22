@@ -21,7 +21,7 @@
 				<div class="col-xs-1">${aMedia.description}</div>
 				<div class="col-xs-1">${aMedia.price}</div>
 				<div class="col-xs-1">${aMedia.genre}</div>
-				<div class="col-xs-2">
+				<div class="col-xs-1">
 					<div class="form-group">
 						<input class="form-control" type="text" value="0" name="cantitate" />
 					</div>

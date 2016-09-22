@@ -18,6 +18,7 @@ public class LoginController {
 	
 	@RequestMapping("/login")
 	public ModelAndView login(User user, HttpServletRequest request){
+<<<<<<< HEAD:src/main/java/ro/jademy/presentation/LoginController.java
 		UserService userService = new UserService();
 		
 		if(userService.checkPassword(user)){
@@ -26,8 +27,17 @@ public class LoginController {
 			ModelAndView mv = new ModelAndView("/mainMenu");
 			mv.addObject("aUser", aUser);
 			return mv;
+=======
+		if (user.getUsername() != null && !user.getUsername().trim().isEmpty()) {
+			User aUser = (new UserService()).checkPassword(user);
+			if (aUser != null) {
+				request.getSession().setAttribute("currentUser", aUser);
+				return new ModelAndView("redirect:mainMenu");
+			}
+			return new ModelAndView("login", "errorMessage", "Autentificare gresita!");
+>>>>>>> origin/master:src/main/java/ra/jademy/presentation/LoginController.java
 		}
-		return new ModelAndView ("login", "errorMessage", "Autentificare gresita!");
+		return new ModelAndView("login", "errorMessage", "");
 	}
 	
 	
