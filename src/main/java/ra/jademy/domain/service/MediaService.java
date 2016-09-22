@@ -12,17 +12,18 @@ public class MediaService {
 		return MediaDAO.getInstance().getAllMedia(productType);
 	}
 
-	public Media getProductByCode(String productCode) {
-		for (ProductType productType : ProductType.values()) {
-
-			List<Media> mediaList = MediaDAO.getInstance().getAllMedia(productType);
-			for (Media media : mediaList) {
-				if (media.getCode().equals(productCode)) {
-					return media;
-				}
-			}
-		}
-		return null;
-
+	public Media getProductByCode(ProductType productType, String code) {
+		// for (ProductType productType : ProductType.values()) {
+		//
+		// List<Media> mediaList =
+		// MediaDAO.getInstance().getAllMedia(productType);
+		// for (Media media : mediaList) {
+		// if (media.getCode().equals(productCode)) {
+		// return media;
+		// }
+		// }
+		// }
+		// return null;
+		return MediaDAO.getInstance().getProductbyCode(productType, code);
 	}
 }
