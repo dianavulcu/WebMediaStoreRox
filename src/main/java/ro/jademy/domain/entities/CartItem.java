@@ -3,12 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ra.jademy.domain.entities;
+package ro.jademy.domain.entities;
 
-/**
- *
- * @author mihai
- */
 public class CartItem {
 	private Media media;
 	private int quantity;

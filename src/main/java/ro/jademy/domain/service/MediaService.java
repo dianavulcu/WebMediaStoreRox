@@ -1,10 +1,10 @@
-package ra.jademy.domain.service;
+package ro.jademy.domain.service;
 
-import ra.jademy.domain.entities.ProductType;
-import ra.jademy.domain.entities.Media;
 import java.util.List;
 
-import ra.jademy.persistance.MediaDAO;
+import ro.jademy.domain.entities.Media;
+import ro.jademy.domain.entities.ProductType;
+import ro.jademy.persistance.MediaDAO;
 
 public class MediaService {
 
@@ -12,17 +12,16 @@ public class MediaService {
 		return MediaDAO.getInstance().getAllMedia(productType);
 	}
 
-	public Media getProductByCode(String productCode) {
-		for (ProductType productType : ProductType.values()) {
-
-			List<Media> mediaList = MediaDAO.getInstance().getAllMedia(productType);
-			for (Media media : mediaList) {
-				if (media.getCode().equals(productCode)) {
-					return media;
-				}
+	public Media getProductByProductTypeAndCode(ProductType productType, String productCode) {
+		List<Media> mediaList = MediaDAO.getInstance().getAllMedia(productType);
+		for (Media media : mediaList) {
+			if (productCode.equals(media.getCode())) {
+				return media;
 			}
 		}
+
 		return null;
 
 	}
+
 }

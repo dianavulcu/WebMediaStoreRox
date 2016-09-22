@@ -1,4 +1,4 @@
-package ra.jademy.domain.service;
+package ro.jademy.domain.service;
 
 import javax.mail.internet.MimeMessage;
 

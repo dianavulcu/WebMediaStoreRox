@@ -1,4 +1,4 @@
-package ra.jademy.persistance;
+package ro.jademy.persistance;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -9,7 +9,8 @@ import java.util.Enumeration;
 import java.util.Properties;
 import java.util.TreeSet;
 
-import ra.jademy.domain.entities.User;
+import ro.jademy.domain.entities.User;
+import ro.jademy.domain.entities.UserType;
 
 public class UserDAO {
 
@@ -18,9 +19,9 @@ public class UserDAO {
 
 	private UserDAO() {
 		importFile = new Properties() {
-		    public synchronized Enumeration<Object> keys() {
-		        return Collections.enumeration(new TreeSet<Object>(keySet()));
-		    }
+			public synchronized Enumeration<Object> keys() {
+				return Collections.enumeration(new TreeSet<Object>(keySet()));
+			}
 		};
 		try {
 			FileInputStream stream = new FileInputStream("user.properties");
@@ -45,11 +46,15 @@ public class UserDAO {
 			if (dbUsername.equals(username)) {
 				String dbPassword = importFile.getProperty("user[" + i + "].password");
 				String dbEmailAddress = importFile.getProperty("user[" + i + "].emailAddress");
-				return new User(dbUsername, dbPassword, dbEmailAddress);
+				UserType dbUserType = UserType.valueOf(importFile.getProperty("user[" + i + "].customer"));
+				User dbUser = new User(dbUsername, dbPassword, dbEmailAddress);
+				dbUser.setUserType(dbUserType);
+				return dbUser;
 			}
+			
 		}
-
 	}
+
 
 
 	public int getNextUserIndex() {
@@ -65,9 +70,9 @@ public class UserDAO {
 
 	public void createUser(User user) {
 		int index = getNextUserIndex();
-		importFile.setProperty("user["+ index +"].username", user.getUsername());
-		importFile.setProperty("user["+ index +"].password", user.getPassword());
-		importFile.setProperty("user["+ index +"].emailAddress", user.getEmailAddress());
+		importFile.setProperty("user[" + index + "].username", user.getUsername());
+		importFile.setProperty("user[" + index + "].password", user.getPassword());
+		importFile.setProperty("user[" + index + "].emailAddress", user.getEmailAddress());
 		FileOutputStream fos;
 		try {
 			fos = new FileOutputStream("user.properties");
@@ -79,8 +84,8 @@ public class UserDAO {
 		}
 
 	}
-	
-	public void updateUser(User user){
+
+	public void updateUser(User user) {
 		int i = 0;
 		while (true) {
 			i++;
@@ -89,13 +94,9 @@ public class UserDAO {
 				return;
 			}
 			if (dbUsername.equals(user.getUsername())) {
-//				System.out.println(user.getPassword());
-//				System.out.println(user.getEmailAddress());
-//				System.out.println(user.getUUID());
-//				System.out.println(i);
-				importFile.setProperty("user["+ i +"].password", user.getPassword());
-				importFile.setProperty("user["+ i +"].emailAddress", user.getEmailAddress());
-				importFile.setProperty("user["+ i +"].uuid", user.getUUID());
+				importFile.setProperty("user[" + i + "].password", user.getPassword());
+				importFile.setProperty("user[" + i + "].emailAddress", user.getEmailAddress());
+				importFile.setProperty("user[" + i + "].uuid", user.getUUID());
 				FileOutputStream fos;
 				try {
 					fos = new FileOutputStream("user.properties");
@@ -106,29 +107,27 @@ public class UserDAO {
 
 				}
 			}
-		
+
+		}
+
 	}
 
-}
-	
-	
-public User getUserByUuid (String uuid){
-	int i = 0;
-	while (true) {
-		i++;
-		String dbUuid = importFile.getProperty("user[" + i + "].uuid");
-		if (dbUuid == null) {
-			return null;
-		}
-		if (dbUuid.equals(uuid)) {
-			String dbUsername = importFile.getProperty("user[" + i + "].username");
-			String dbPassword = importFile.getProperty("user[" + i + "].password");
-			String dbEmailAddress = importFile.getProperty("user[" + i + "].emailAddress");
-			User user = new User(dbUsername, dbPassword, dbEmailAddress, uuid);
-			return user;
+	public User getUserByUuid(String uuid) {
+		int i = 0;
+		while (true) {
+			i++;
+			String dbUuid = importFile.getProperty("user[" + i + "].uuid");
+			if (dbUuid == null) {
+				return null;
+			}
+			if (dbUuid.equals(uuid)) {
+				String dbUsername = importFile.getProperty("user[" + i + "].username");
+				String dbPassword = importFile.getProperty("user[" + i + "].password");
+				String dbEmailAddress = importFile.getProperty("user[" + i + "].emailAddress");
+				User user = new User(dbUsername, dbPassword, dbEmailAddress, uuid);
+				return user;
+			}
 		}
 	}
-}
-	
-	
+
 }

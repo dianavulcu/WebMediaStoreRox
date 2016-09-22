@@ -23,7 +23,7 @@
 				<div class="col-xs-1">${aMedia.genre}</div>
 				<div class="col-xs-2">
 					<div class="form-group">
-						<input class="form-control" type="text" value="1" name="cantitate" />
+						<input class="form-control" type="text" value="0" name="cantitate" />
 					</div>
 				</div>
 				<div class="col-xs-2">
@@ -34,9 +34,10 @@
 			</div>
 			<input type="hidden" value="${aMedia.code}" name="productCode"/>
 			<input type="hidden" value="${productType}" name="productType"/>
+			<input type="hidden" value="${aUser}" name="aUser"/>
 		</form>
 	</c:forEach>
-	<h6>Avem ${fn:length(cart.cartItems)} produse in shopping cart</h6>
-			
+	<h6>TOTAL: ${fn:length(cart.cartItems)} produse, cantitate: ${totalItems}, Total: ${price} RON</h6>
+<a href="http://localhost:8080/mainMenu"><h6>Inapoi la meniul principal</h6></a>	
 </body>
 </html>

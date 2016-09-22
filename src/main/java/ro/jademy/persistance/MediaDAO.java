@@ -1,4 +1,4 @@
-package ra.jademy.persistance;
+package ro.jademy.persistance;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -7,15 +7,16 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map.Entry;
+
+import ro.jademy.domain.entities.CD;
+import ro.jademy.domain.entities.DVD;
+import ro.jademy.domain.entities.EBOOK;
+import ro.jademy.domain.entities.MediaGenre;
+import ro.jademy.domain.entities.Media;
+import ro.jademy.domain.entities.ProductType;
+
 import java.util.Properties;
 import java.util.TreeSet;
-
-import ra.jademy.domain.entities.CD;
-import ra.jademy.domain.entities.DVD;
-import ra.jademy.domain.entities.EBOOK;
-import ra.jademy.domain.entities.Genre;
-import ra.jademy.domain.entities.Media;
-import ra.jademy.domain.entities.ProductType;
 
 public class MediaDAO {
 	private Properties importFile;
@@ -52,7 +53,7 @@ public class MediaDAO {
 			String dbTitle = importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].title");
 			Double dbPrice = Double
 					.valueOf(importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].price"));
-			Genre dbGenre = Genre
+			MediaGenre dbGenre = MediaGenre
 					.valueOf(importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].genre"));
 			String dbArtist = importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].artist");
 			String dbDirectors = importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].directors");
@@ -76,14 +77,5 @@ public class MediaDAO {
 		}
 		return aList;
 	}
-	public Media getByCode(String productCode){
-		int i=0;
-		for (Entry pEntry:importFile.entrySet()){
-			i++;
-			if (pEntry.getValue().equals(productCode) && ((String)pEntry.getKey()).endsWith(".code")){
-				
-			}
-		}
-		return null;
-	}
+
 }

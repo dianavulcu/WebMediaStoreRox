@@ -1,11 +1,11 @@
-package ra.jademy.domain.entities;
+package ro.jademy.domain.entities;
 
-import ra.jademy.domain.entities.EBOOK.Builder;
+import ro.jademy.domain.entities.EBOOK.Builder;
 
 public class EBOOK extends Media{
 	private String author;
 
-	public EBOOK(String title, double price, String code, Genre genre, String author) {
+	public EBOOK(String title, double price, String code, MediaGenre genre, String author) {
 		super(title, price, code, genre);
 		this.author = author;
 		// TODO Auto-generated constructor stub
@@ -21,7 +21,7 @@ public class EBOOK extends Media{
 		 String title;
 		 double price; 
 		 String code;
-		 Genre genre;
+		 MediaGenre genre;
 		 String author;
 		 
 		 public Builder title(String title) {
@@ -40,7 +40,7 @@ public class EBOOK extends Media{
 			 this. code= code;
 			 return this;
 		 }
-		 public Builder genre(Genre genre) {
+		 public Builder genre(MediaGenre genre) {
 			 this. genre= genre;
 			 return this;
 		 }

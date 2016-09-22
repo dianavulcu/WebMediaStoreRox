@@ -1,14 +1,19 @@
-package ra.jademy.domain.entities;
+package ro.jademy.domain.entities;
+
+import ro.jademy.persistance.UserDAO;
 
 public class User {
 	private String username;
 	private String password;
 	private String emailAddress;
 	private String uuid;
+	private UserType userType;
 	
 	public User (){
 		
 	}
+	
+	
 	public User (String username, String password, String emailAddress){
 		this.username=username;
 		this.password=password;
@@ -16,9 +21,7 @@ public class User {
 	}
 	
 	public User (String username, String password, String emailAddress, String uuid){
-		this.username=username;
-		this.password=password;
-		this.emailAddress = emailAddress;
+		this(username, password, emailAddress);
 		this.uuid = uuid;
 	}
 	
@@ -45,6 +48,17 @@ public class User {
 	}
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
+	}
+
+
+	public UserType getUserType(String username) {
+		UserDAO.getInstance().getUserByUsername(username);
+		return userType;
+	}
+
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
 	
 

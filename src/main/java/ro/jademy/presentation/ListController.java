@@ -1,4 +1,4 @@
-package ra.jademy.presentation;
+package ro.jademy.presentation;
 
 import java.util.List;
 
@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import ra.jademy.domain.entities.Media;
-import ra.jademy.domain.service.MediaService;
-import ra.jademy.domain.entities.ProductType;
+import ro.jademy.domain.entities.Media;
+import ro.jademy.domain.entities.ProductType;
+import ro.jademy.domain.entities.User;
+import ro.jademy.domain.service.MediaService;
 
 @Controller
 public class ListController {

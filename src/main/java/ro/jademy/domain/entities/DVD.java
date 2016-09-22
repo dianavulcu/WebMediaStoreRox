@@ -1,12 +1,12 @@
-package ra.jademy.domain.entities;
+package ro.jademy.domain.entities;
 
-import ra.jademy.domain.entities.DVD.Builder;
+import ro.jademy.domain.entities.DVD.Builder;
 
 public class DVD extends Media{
 	private String directors;
 	private String productionLabel;
 	
-	public DVD(String title, double price, String code, Genre genre, String directors, String productionLabel){
+	public DVD(String title, double price, String code, MediaGenre genre, String directors, String productionLabel){
 		super(title, price, code, genre);
 		this.directors = directors;
 		this.productionLabel = productionLabel;		
@@ -30,7 +30,7 @@ public class DVD extends Media{
 		 String title;
 		 double price; 
 		 String code;
-		 Genre genre;
+		 MediaGenre genre;
 		 String directors;
 		 String productionLabel;
 		 
@@ -46,7 +46,7 @@ public class DVD extends Media{
 			 this. code= code;
 			 return this;
 		 }
-		 public Builder genre(Genre genre) {
+		 public Builder genre(MediaGenre genre) {
 			 this. genre= genre;
 			 return this;
 		 }

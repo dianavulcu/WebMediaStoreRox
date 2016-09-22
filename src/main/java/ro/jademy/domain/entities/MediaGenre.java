@@ -1,5 +1,5 @@
-package ra.jademy.domain.entities;
+package ro.jademy.domain.entities;
 
-public enum Genre {
+public enum MediaGenre {
 	ROCK, POP, CLASSICAL, FANTASY, ADVENTURE, SF, DRAMA
 }

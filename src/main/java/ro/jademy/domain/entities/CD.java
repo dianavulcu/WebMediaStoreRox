@@ -1,11 +1,11 @@
-package ra.jademy.domain.entities;
+package ro.jademy.domain.entities;
 
-import ra.jademy.domain.entities.CD.Builder;
+import ro.jademy.domain.entities.CD.Builder;
 
 public class CD extends Media {
 	private String artist;
 	
-	public CD(String title, double price, String code, Genre genre, String artist) {
+	public CD(String title, double price, String code, MediaGenre genre, String artist) {
 		super(title, price, code, genre);
 		this.artist = artist;
 	}
@@ -24,7 +24,7 @@ public class CD extends Media {
 		 String title;
 		 double price; 
 		 String code;
-		 Genre genre;
+		 MediaGenre genre;
 		 String artist;
 		 
 		 public Builder title(String title) {
@@ -43,7 +43,7 @@ public class CD extends Media {
 			 this. code= code;
 			 return this;
 		 }
-		 public Builder genre(Genre genre) {
+		 public Builder genre(MediaGenre genre) {
 			 this. genre= genre;
 			 return this;
 		 }

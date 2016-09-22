@@ -1,4 +1,4 @@
-package ra.jademy.presentation;
+package ro.jademy.presentation;
 
 import java.util.UUID;
 
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import ra.jademy.domain.service.MailService;
-import ra.jademy.domain.entities.User;
-import ra.jademy.domain.service.UserService;
+import ro.jademy.domain.entities.User;
+import ro.jademy.domain.service.MailService;
+import ro.jademy.domain.service.UserService;
 
 @Controller
 public class ForgotController {

@@ -1,7 +1,7 @@
-package ra.jademy.domain.service;
+package ro.jademy.domain.service;
 
-import ra.jademy.domain.entities.User;
-import ra.jademy.persistance.UserDAO;
+import ro.jademy.domain.entities.User;
+import ro.jademy.persistance.UserDAO;
 
 public class UserService {
 	public boolean checkPassword(User user) {

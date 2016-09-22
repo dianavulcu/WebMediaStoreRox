@@ -1,4 +1,4 @@
-package ra.jademy;
+package ro.jademy;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
