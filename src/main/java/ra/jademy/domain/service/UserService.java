@@ -4,16 +4,28 @@ import ra.jademy.domain.entities.User;
 import ra.jademy.persistance.UserDAO;
 
 public class UserService {
-	public boolean checkPassword(User user) {
+//	public boolean checkPassword(User user) {
+//		User dbUser = getUser(user.getUsername());
+//
+//		if (dbUser == null) {
+//			return false;
+//		}
+//		if (dbUser.getPassword().equals(user.getPassword())) {
+//			return true;
+//		}
+//		return false;
+//	}
+
+	public User checkPassword(User user) {
 		User dbUser = getUser(user.getUsername());
 
 		if (dbUser == null) {
-			return false;
+			return dbUser;
 		}
 		if (dbUser.getPassword().equals(user.getPassword())) {
-			return true;
+			return dbUser;
 		}
-		return false;
+		return null;
 	}
 
 	public User getUser(String username) {

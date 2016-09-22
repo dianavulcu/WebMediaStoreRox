@@ -19,14 +19,15 @@ public class LoginController {
 	
 	@RequestMapping("/login")
 	public ModelAndView login(User user, HttpServletRequest request){
-		UserService userService = new UserService();
-		
-		if(userService.checkPassword(user)){
-			User aUser  = userService.getUser(user.getUsername());
-			request.getSession().setAttribute("currentUser", aUser);
-			return new ModelAndView("redirect:mainMenu");
+		if (user.getUsername() != null && !user.getUsername().trim().isEmpty()) {
+			User aUser = (new UserService()).checkPassword(user);
+			if (aUser != null) {
+				request.getSession().setAttribute("currentUser", aUser);
+				return new ModelAndView("redirect:mainMenu");
+			}
+			return new ModelAndView("login", "errorMessage", "Autentificare gresita!");
 		}
-		return new ModelAndView ("login", "errorMessage", "Autentificare gresita!");
+		return new ModelAndView("login", "errorMessage", "");
 	}
 	
 	
