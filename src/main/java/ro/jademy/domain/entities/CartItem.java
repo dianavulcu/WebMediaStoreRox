@@ -29,6 +29,10 @@ public class CartItem {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
+	public double getTotalPrice() {
+		return getMedia().getPrice()*getQuantity();
+	}
 	
 	
 }

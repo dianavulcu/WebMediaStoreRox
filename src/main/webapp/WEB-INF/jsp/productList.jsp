@@ -34,10 +34,11 @@
 			</div>
 			<input type="hidden" value="${aMedia.code}" name="productCode"/>
 			<input type="hidden" value="${productType}" name="productType"/>
-			<input type="hidden" value="${aUser}" name="aUser"/>
 		</form>
 	</c:forEach>
-	<h6>TOTAL: ${fn:length(cart.cartItems)} produse, cantitate: ${totalItems}, Total: ${price} RON</h6>
-<a href="http://localhost:8080/mainMenu"><h6>Inapoi la meniul principal</h6></a>	
+	<h6>TOTAL: ${fn:length(shoppingCart.cartItems)} produse, cantitate: ${shoppingCart.totalItems}, Total: ${shoppingCart.totalPrice} RON</h6>
+<a href="/mainMenu"><h6>Inapoi la meniul principal</h6></a>
+<a href="/displayCart"><h6>Afișeaza coșul</h6></a>
+	
 </body>
 </html>
