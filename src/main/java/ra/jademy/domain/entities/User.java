@@ -1,4 +1,4 @@
-package ra.jademy.domain;
+package ra.jademy.domain.entities;
 
 public class User {
 	private String username;

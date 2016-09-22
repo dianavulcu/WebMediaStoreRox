@@ -1,21 +1,20 @@
-package ra.jademy.domain;
+package ra.jademy.domain.entities;
 
-public class CD extends Media {
-	private String artist;
-	
-	public CD(String title, double price, String code, Genre genre, String artist) {
+import ra.jademy.domain.entities.EBOOK.Builder;
+
+public class EBOOK extends Media{
+	private String author;
+
+	public EBOOK(String title, double price, String code, Genre genre, String author) {
 		super(title, price, code, genre);
-		this.artist = artist;
-	}
-
-	public String getArtist() {
-		return artist;
+		this.author = author;
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return artist;
+		return author;
 	}
 	
 	 public static class Builder {
@@ -23,14 +22,14 @@ public class CD extends Media {
 		 double price; 
 		 String code;
 		 Genre genre;
-		 String artist;
+		 String author;
 		 
 		 public Builder title(String title) {
 			 this. title= title;
 			 return this;
 		 }
-		 public Builder artist(String artist) {
-			 this. artist= artist;
+		 public Builder author(String author) {
+			 this.author = author;
 			 return this;
 		 }
 		 public Builder price(double price) {
@@ -46,9 +45,11 @@ public class CD extends Media {
 			 return this;
 		 }
 		 
-		 public CD build() {
-			 return new CD(title, price, code, genre, artist);
+		 public EBOOK build() {
+			 return new EBOOK(title, price, code, genre, author);
 		 }
+		}
 	 }
+	
 
-}
+

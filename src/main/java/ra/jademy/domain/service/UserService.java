@@ -1,5 +1,6 @@
-package ra.jademy.domain;
+package ra.jademy.domain.service;
 
+import ra.jademy.domain.entities.User;
 import ra.jademy.persistance.UserDAO;
 
 public class UserService {

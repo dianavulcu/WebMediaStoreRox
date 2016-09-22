@@ -6,14 +6,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.TreeSet;
 
-import ra.jademy.domain.CD;
-import ra.jademy.domain.Genre;
-import ra.jademy.domain.Media;
-import ra.jademy.domain.ProductType;
-import ra.jademy.domain.User;
+import ra.jademy.domain.entities.CD;
+import ra.jademy.domain.entities.DVD;
+import ra.jademy.domain.entities.EBOOK;
+import ra.jademy.domain.entities.Genre;
+import ra.jademy.domain.entities.Media;
+import ra.jademy.domain.entities.ProductType;
 
 public class MediaDAO {
 	private Properties importFile;
@@ -53,9 +55,35 @@ public class MediaDAO {
 			Genre dbGenre = Genre
 					.valueOf(importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].genre"));
 			String dbArtist = importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].artist");
-			CD cd = new CD.Builder().title(dbTitle).artist(dbArtist).price(dbPrice).code(dbCode).genre(dbGenre).build();
-			aList.add(cd);
+			String dbDirectors = importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].directors");
+			String dbProductionLabels = importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].productionLabels");
+			String dbAuthor = importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].author");
+			Media media = null;
+			switch(productType){
+			case CD:
+				media = new CD.Builder().title(dbTitle).artist(dbArtist).price(dbPrice).code(dbCode).genre(dbGenre).build();
+			
+				break;
+			case DVD:
+				media  = new DVD.Builder().title(dbTitle).directors(dbDirectors).productionLabel(dbProductionLabels).price(dbPrice).code(dbCode).genre(dbGenre).build();
+				
+				break;
+			case EBOOK:
+				media = new EBOOK.Builder().title(dbTitle).author(dbAuthor).price(dbPrice).code(dbCode).genre(dbGenre).build();
+							
+			}
+			aList.add(media);
 		}
 		return aList;
+	}
+	public Media getByCode(String productCode){
+		int i=0;
+		for (Entry pEntry:importFile.entrySet()){
+			i++;
+			if (pEntry.getValue().equals(productCode) && ((String)pEntry.getKey()).endsWith(".code")){
+				
+			}
+		}
+		return null;
 	}
 }
