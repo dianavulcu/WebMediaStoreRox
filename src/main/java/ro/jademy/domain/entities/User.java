@@ -20,10 +20,14 @@ public class User {
 		this.emailAddress = emailAddress;
 	}
 	
-	public User (String username, String password, String emailAddress, String uuid, UserType userType){
+	public User (String username, String password, String emailAddress, UserType userType){
 		this(username, password, emailAddress);
-		this.uuid = uuid;
 		this.userType = userType;
+	}
+	
+	public User (String username, String password, String emailAddress, String uuid, UserType userType){
+		this(username, password, emailAddress, userType);
+		this.uuid = uuid;
 	}
 	
 	public String getUsername() {

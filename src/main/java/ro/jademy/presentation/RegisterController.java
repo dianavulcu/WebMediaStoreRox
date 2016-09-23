@@ -19,6 +19,9 @@ public class RegisterController {
 	@Autowired
 	MailService mailService;
 
+	@Autowired
+	UserService userService;
+	
 	@RequestMapping("/register")
 	public ModelAndView displayMenuRegister() {
 
@@ -40,19 +43,17 @@ public class RegisterController {
 			mv.addObject("errorMessage", "Parolele nu se potrivesc");
 			return mv;
 		}
-		// UserService userService = new UserService();
+		
 		if ((new UserService()).getUser(userName) != null) {
 			ModelAndView mv = new ModelAndView("registerMenu");
 			mv.addObject("errorMessage", "Userul exista deja");
 			return mv;
-
 		}
 
-		User savedUser = (new UserService()).saveUser(new User(userName, password, emailAddress));
+		User savedUser = userService.saveUser(new User(userName, password, emailAddress));
 		mailService.sendRegistrationMail(savedUser);
 		ModelAndView mv = new ModelAndView("login", "errorMessage",
-				"Userul a fost creat cu succes. Verifica-ti si mailul.");
-
+				"Userul a fost creat cu succes. Verifica-ti si emailul.");
 		return mv;
 	}
 
