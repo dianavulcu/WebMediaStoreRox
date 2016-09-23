@@ -51,7 +51,7 @@ public class ForgotController {
 			String url = request.getRequestURL().toString();
 			System.out.println("Current URL is:" + url);
 
-			mailService.sendNewPasswordMail(userService.getUserByUsername(userName), url);
+			mailService.sendPasswordResetMail(userService.getUserByUsername(userName), url);
 
 			ModelAndView mv = new ModelAndView("login", "errorMessage",
 					"Dati click pe linkul primit pe mail pentru a ve reseta parola.");
@@ -77,8 +77,10 @@ public class ForgotController {
 			return new ModelAndView("resetPassword", "errorMessage", "Parolele nu se potrivesc");
 		}
 		
-		userService.updateUserPassword(userService.getUserByUuid(uuid), password);
-		userService.resetUuid(userService.getUserByUuid(uuid));
+		User user = userService.getUserByUuid(uuid);
+		userService.updateUserPassword(user, password);
+		userService.resetUuid(user);
+		mailService.sendNewPasswordMail(user);
 		
 		return new ModelAndView("login", "errorMessage", "V-am trimis mail cu noua parola. Logati-va din nou");
 	}

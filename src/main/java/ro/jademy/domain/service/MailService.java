@@ -25,7 +25,7 @@ public class MailService {
 
 	@Autowired
 	private VelocityEngine velocityEngine;
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -46,7 +46,7 @@ public class MailService {
 		}
 	}
 
-	public void sendNewPasswordMail(User user, String url) {
+	public void sendPasswordResetMail(User user, String url) {
 		try {
 			MimeMessage mail = javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(mail, true);
@@ -54,17 +54,36 @@ public class MailService {
 			helper.setSubject(user.getUsername() + ", you requested a new password");
 
 			Map model = new HashMap<>();
-			
+
 			String code = UUID.randomUUID().toString();
 			user.setUuid(code);
 			userService.updateUser(user);
-			
+
 			url = url + "/" + user.getUuid();
-			
+
 			model.put("user", user);
 			model.put("url", url);
-			
+
 			helper.setText(VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "forgot-password.vm",
+					CHARSET_UTF8, model), true);
+			javaMailSender.send(mail);
+		} catch (Exception e) {
+			throw new RuntimeException("Cannot send mail", e);
+		}
+	}
+
+	public void sendNewPasswordMail(User user) {
+		try {
+			MimeMessage mail = javaMailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(mail, true);
+			helper.setTo(user.getEmailAddress());
+			helper.setSubject(user.getUsername() + ", here is your new password");
+
+			Map model = new HashMap<>();
+
+			model.put("user", user);
+
+			helper.setText(VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "new-password.vm",
 					CHARSET_UTF8, model), true);
 			javaMailSender.send(mail);
 		} catch (Exception e) {
