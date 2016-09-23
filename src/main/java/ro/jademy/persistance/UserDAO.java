@@ -125,7 +125,7 @@ public class UserDAO {
 				String dbUsername = importFile.getProperty("user[" + i + "].username");
 				String dbPassword = importFile.getProperty("user[" + i + "].password");
 				String dbEmailAddress = importFile.getProperty("user[" + i + "].emailAddress");
-				User user = new User(dbUsername, dbPassword, dbEmailAddress, uuid);
+				User user = new User(dbUsername, dbPassword, dbEmailAddress, uuid, dbUserType);
 				return user;
 			}
 		}

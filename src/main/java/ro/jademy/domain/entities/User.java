@@ -20,9 +20,10 @@ public class User {
 		this.emailAddress = emailAddress;
 	}
 	
-	public User (String username, String password, String emailAddress, String uuid){
+	public User (String username, String password, String emailAddress, String uuid, UserType userType){
 		this(username, password, emailAddress);
 		this.uuid = uuid;
+		this.userType = userType;
 	}
 	
 	public String getUsername() {
