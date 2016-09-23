@@ -73,6 +73,7 @@ public class UserDAO {
 		importFile.setProperty("user[" + index + "].username", user.getUsername());
 		importFile.setProperty("user[" + index + "].password", user.getPassword());
 		importFile.setProperty("user[" + index + "].emailAddress", user.getEmailAddress());
+		importFile.setProperty("user[" + index + "].customer", "REGULAR");
 		FileOutputStream fos;
 		try {
 			fos = new FileOutputStream("user.properties");

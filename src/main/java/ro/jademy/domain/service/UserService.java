@@ -1,8 +1,12 @@
 package ro.jademy.domain.service;
 
+import org.springframework.stereotype.Service;
+
 import ro.jademy.domain.entities.User;
 import ro.jademy.persistance.UserDAO;
 
+
+@Service
 public class UserService {
 //	public boolean checkPassword(User user) {
 //		User dbUser = getUser(user.getUsername());
