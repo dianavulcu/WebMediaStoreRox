@@ -1,9 +1,15 @@
 <hmtl>
 	<body>
 		<h3>Salut ${user.username}, aceasta este comanda ta:<h3>
+			<table>
+			<tr><td>nr.</td><td>  </td> <td>titlu</td><td>  </td><td>pret</td><td>  </td><td>cantitate</td></tr>
 			#foreach ($cartItem in $shoppingCartitems)
-				<h5>${cartItem.media.title} --- ${cartItem.quantity} bucati<h5>
+			<tr><h5><td>$velocityCount</td><td>  </td><td>${cartItem.media.title}</td><td>  </td><td>${cartItem.media.price}</td><td>  </td><td>${cartItem.quantity} bucati</td><h5></tr>
 			#end			
+			</table>
+			
+			<h3>Total pret: ${total}</h3>
+
 		<h3>Spor la cumparaturi :)</h3>
 	</body>
 </html>

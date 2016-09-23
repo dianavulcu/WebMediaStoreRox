@@ -103,6 +103,7 @@ public class MailService {
 			Map model = new HashMap<>();
 			model.put("user", user);
 			model.put("shoppingCartitems", shoppingCart.getCartItems());
+			model.put("total", shoppingCart.getTotalPrice());
 
 			helper.setText(
 					VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "checkout.vm", CHARSET_UTF8, model),
