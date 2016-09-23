@@ -9,12 +9,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/recoverPassword" method="POST">
-<h3>Esti logat cu userul: </h3> ${userName}
-<h3>Password:</h3>
+<form action="/resetPassword" method="POST">
+<h3>Introdu o noua parola pentru userul ${user.username}: </h3>
+<h3>Parola:</h3>
 <input type="password" name="password"/><br/><br/>
+<h3>Repeta parola:</h3>
 <input type="password" name="repeatPassword"/><br/><br/>
-<input type = "hidden" name="uuid" value = "${uuid}"/>
+<input type = "hidden" name="uuid" value = "${user.uuid}"/>
 
 ${errorMessage}
 <br/>

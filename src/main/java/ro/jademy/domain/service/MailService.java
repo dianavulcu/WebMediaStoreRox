@@ -57,7 +57,7 @@ public class MailService {
 			
 			String code = UUID.randomUUID().toString();
 			user.setUUID(code);
-			userService.updateUserService(user);
+			userService.updateUser(user);
 			
 			url = url + "/" + user.getUUID();
 			

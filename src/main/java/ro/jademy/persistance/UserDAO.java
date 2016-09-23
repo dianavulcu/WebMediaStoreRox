@@ -91,6 +91,8 @@ public class UserDAO {
 				return;
 			}
 			if (dbUsername.equals(user.getUsername())) {
+				String s = user.getPassword();
+				System.out.println(s);
 				importFile.setProperty("user[" + i + "].password", user.getPassword());
 				importFile.setProperty("user[" + i + "].emailAddress", user.getEmailAddress());
 				importFile.setProperty("user[" + i + "].uuid", user.getUUID());

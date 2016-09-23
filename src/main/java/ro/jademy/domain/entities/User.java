@@ -6,6 +6,30 @@ public class User {
 	private String username;
 	private String password;
 	private String emailAddress;
+	/**
+	 * @return the uuid
+	 */
+	public String getUuid() {
+		return uuid;
+	}
+
+
+	/**
+	 * @param uuid the uuid to set
+	 */
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+
+	/**
+	 * @return the userType
+	 */
+	public UserType getUserType() {
+		return userType;
+	}
+
+
 	private String uuid;
 	private UserType userType;
 	

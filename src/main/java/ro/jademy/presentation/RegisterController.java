@@ -43,8 +43,8 @@ public class RegisterController {
 			mv.addObject("errorMessage", "Parolele nu se potrivesc");
 			return mv;
 		}
-		
-		if ((new UserService()).getUser(userName) != null) {
+		// UserService userService = new UserService();
+		if ((new UserService()).getUserByUserName(userName) != null) {
 			ModelAndView mv = new ModelAndView("registerMenu");
 			mv.addObject("errorMessage", "Userul exista deja");
 			return mv;
