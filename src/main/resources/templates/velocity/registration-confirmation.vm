@@ -1,0 +1,9 @@
+<hmtl>
+	<body>
+		<h3>Salut ${user.username}, te-ai inregistrat cu succes!<h3>
+		<h5>Userul tau este ${user.username}</h5>
+		<h5>Parola ta este ${user.password}</h5>
+		<h5>Adresa ta de mail este <a href="mailto:${user.emailAddress}">${user.emailAddress}</a>.</h5>
+		<h3>Sport la cumparaturi :)</h3>
+	</body>
+</html>

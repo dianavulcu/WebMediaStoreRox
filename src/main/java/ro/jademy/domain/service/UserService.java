@@ -35,7 +35,7 @@ public class UserService {
 
 	public User saveUser(User user) {
 		UserDAO.getInstance().createUser(user);
-		return null;
+		return user;
 	}
 		
 	public void updateUserService(User user){

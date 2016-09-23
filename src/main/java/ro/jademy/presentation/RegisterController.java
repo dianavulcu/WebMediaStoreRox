@@ -15,10 +15,10 @@ import ro.jademy.domain.service.UserService;
 
 @Controller
 public class RegisterController {
-	
+
 	@Autowired
 	MailService mailService;
-	
+
 	@RequestMapping("/register")
 	public ModelAndView displayMenuRegister() {
 
@@ -28,35 +28,32 @@ public class RegisterController {
 	@RequestMapping("/registerUser")
 	public ModelAndView saveNewUser(String userName, String password, String repeatPassword, String emailAddress) {
 
-		
-		if(userName == null || password == null || repeatPassword == null || userName.trim().isEmpty() || password.trim().isEmpty() || repeatPassword.trim().isEmpty()){
+		if (userName == null || password == null || repeatPassword == null || userName.trim().isEmpty()
+				|| password.trim().isEmpty() || repeatPassword.trim().isEmpty()) {
 			ModelAndView mv = new ModelAndView("registerMenu");
 			mv.addObject("errorMessage", "Campurile sunt obligatorii");
 			return mv;
 		}
-		
-			
+
 		if (!(password.equals(repeatPassword))) {
 			ModelAndView mv = new ModelAndView("registerMenu");
 			mv.addObject("errorMessage", "Parolele nu se potrivesc");
 			return mv;
 		}
-		//UserService userService = new UserService();
-		if((new UserService()).getUser(userName)!= null  ){
+		// UserService userService = new UserService();
+		if ((new UserService()).getUser(userName) != null) {
 			ModelAndView mv = new ModelAndView("registerMenu");
-			mv.addObject("errorMessage", "Userul exista deja" );
+			mv.addObject("errorMessage", "Userul exista deja");
 			return mv;
-			
+
 		}
-		
-	
-		
-		User savedUser =  (new UserService()).saveUser(new User(userName , password, emailAddress));
-		
-		ModelAndView mv = new ModelAndView("login", "errorMessage", "Userul a fost creat cu succes.");
+
+		User savedUser = (new UserService()).saveUser(new User(userName, password, emailAddress));
+		mailService.sendRegistrationMail(savedUser);
+		ModelAndView mv = new ModelAndView("login", "errorMessage",
+				"Userul a fost creat cu succes. Verifica-ti si mailul.");
+
 		return mv;
 	}
 
 }
-
-

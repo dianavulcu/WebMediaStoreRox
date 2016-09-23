@@ -57,7 +57,7 @@ public class ForgotController {
 		user.setUUID(code);
 		UserService userService = new UserService();
 		userService.updateUserService(user);
-		mailService.sendMail(user.getEmailAddress(), "Parola noua", "Schimba parola la linkul: http://localhost:8080/displayPassword/" + code, false);
+		//mailService.sendMail(user.getEmailAddress(), "Parola noua", "Schimba parola la linkul: http://localhost:8080/displayPassword/" + code, false);
 	}
 	
 //	@RequestMapping("/recoverPasswordRequest/{UUID}")
