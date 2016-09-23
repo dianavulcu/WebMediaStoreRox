@@ -95,8 +95,8 @@ public class UserDAO {
 				System.out.println(s);
 				importFile.setProperty("user[" + i + "].password", user.getPassword());
 				importFile.setProperty("user[" + i + "].emailAddress", user.getEmailAddress());
-				importFile.setProperty("user[" + i + "].uuid", user.getUUID());
-				importFile.setProperty("user[" + i + "].customer", user.getUserType(dbUsername).name());
+				importFile.setProperty("user[" + i + "].uuid", user.getUuid());
+				importFile.setProperty("user[" + i + "].customer", user.getUserType().name());
 				FileOutputStream fos;
 				try {
 					fos = new FileOutputStream("user.properties");

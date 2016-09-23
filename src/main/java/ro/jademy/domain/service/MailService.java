@@ -56,10 +56,10 @@ public class MailService {
 			Map model = new HashMap<>();
 			
 			String code = UUID.randomUUID().toString();
-			user.setUUID(code);
+			user.setUuid(code);
 			userService.updateUser(user);
 			
-			url = url + "/" + user.getUUID();
+			url = url + "/" + user.getUuid();
 			
 			model.put("user", user);
 			model.put("url", url);

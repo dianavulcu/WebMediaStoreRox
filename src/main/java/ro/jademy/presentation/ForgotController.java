@@ -35,23 +35,23 @@ public class ForgotController {
 			return mv;
 		}
 
-		if (userService.getUserByUserName(userName) == null) {
+		if (userService.getUserByUsername(userName) == null) {
 			ModelAndView mv = new ModelAndView("forgotPassword");
 			mv.addObject("errorMessage", "Userul nu exista.");
 			return mv;
 		}
-		if (!(userService.getUserByUserName(userName).getEmailAddress().equals(emailAddress))) {
+		if (!(userService.getUserByUsername(userName).getEmailAddress().equals(emailAddress))) {
 			ModelAndView mv = new ModelAndView("forgotPassword");
 			mv.addObject("errorMessage", "Adresa de email nu corespunde cu userul.");
 			return mv;
 		}
-		if ((userService.getUserByUserName(userName) != null)
-				&& (userService.getUserByUserName(userName).getEmailAddress().equals(emailAddress))) {
+		if ((userService.getUserByUsername(userName) != null)
+				&& (userService.getUserByUsername(userName).getEmailAddress().equals(emailAddress))) {
 
 			String url = request.getRequestURL().toString();
 			System.out.println("Current URL is:" + url);
 
-			mailService.sendNewPasswordMail(userService.getUserByUserName(userName), url);
+			mailService.sendNewPasswordMail(userService.getUserByUsername(userName), url);
 
 			ModelAndView mv = new ModelAndView("login", "errorMessage",
 					"Dati click pe linkul primit pe mail pentru a ve reseta parola.");

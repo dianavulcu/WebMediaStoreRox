@@ -12,7 +12,7 @@ import ro.jademy.persistance.UserDAO;
 public class UserService {
 
 	public User checkPassword(User user) {
-		User dbUser = getUserByUserName(user.getUsername());
+		User dbUser = getUserByUsername(user.getUsername());
 
 		if (dbUser == null) {
 			return dbUser;
@@ -23,7 +23,7 @@ public class UserService {
 		return null;
 	}
 
-	public User getUser(String username) {
+	public User getUserByUsername(String username) {
 		return UserDAO.getInstance().getUserByUsername(username);
 	}
 
@@ -32,12 +32,23 @@ public class UserService {
 		return user;
 	}
 		
-		
+	public void updateUser(User user){
+		UserDAO.getInstance().updateUser(user);
 	}
 	
-	public void resetUuid(User user) {
+	public User getUserByUuid(String uuid) {
 		return UserDAO.getInstance().getUserByUuid(uuid);
-		
+	}
+
+	
+
+	public void updateUserPassword(User user, String password) {
+		user.setPassword(password);
+		updateUser(user);	
+	}
+
+	public void resetUuid(User user) {
+		user.setUuid(UUID.randomUUID().toString());	
 	}
 
 	

@@ -6,89 +6,67 @@ public class User {
 	private String username;
 	private String password;
 	private String emailAddress;
-	/**
-	 * @return the uuid
-	 */
-	public String getUuid() {
-		return uuid;
-	}
-
-
-	/**
-	 * @param uuid the uuid to set
-	 */
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
-
-
-	/**
-	 * @return the userType
-	 */
-	public UserType getUserType() {
-		return userType;
-	}
-
-
 	private String uuid;
 	private UserType userType;
-	
-	public User (){
-		
+
+	// constructors
+	public User() {
 	}
-	
-	
-	public User (String username, String password, String emailAddress){
-		this.username=username;
-		this.password=password;
+
+	public User(String username, String password, String emailAddress) {
+		this.username = username;
+		this.password = password;
 		this.emailAddress = emailAddress;
 	}
-	
-	public User (String username, String password, String emailAddress, UserType userType){
+
+	public User(String username, String password, String emailAddress, UserType userType) {
 		this(username, password, emailAddress);
 		this.userType = userType;
 	}
-	
-	public User (String username, String password, String emailAddress, String uuid, UserType userType){
+
+	public User(String username, String password, String emailAddress, String uuid, UserType userType) {
 		this(username, password, emailAddress, userType);
 		this.uuid = uuid;
 	}
-	
+
+	// getters and setters
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getPassword() {
 		return password;
 	}
-	public String getUUID() {
-		return uuid;
-	}
-	public void setUUID(String uuid) {
-		this.uuid = uuid;
-	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getEmailAddress() {
 		return emailAddress;
 	}
+
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
 	}
 
-
-	public UserType getUserType(String username) {
-		UserDAO.getInstance().getUserByUsername(username);
-		return userType;
+	public String getUuid() {
+		return uuid;
 	}
 
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public UserType getUserType() {
+		return userType;
+	}
 
 	public void setUserType(UserType userType) {
 		this.userType = userType;
 	}
-	
-
 }

@@ -44,7 +44,7 @@ public class RegisterController {
 			return mv;
 		}
 		// UserService userService = new UserService();
-		if ((new UserService()).getUserByUserName(userName) != null) {
+		if ((new UserService()).getUserByUsername(userName) != null) {
 			ModelAndView mv = new ModelAndView("registerMenu");
 			mv.addObject("errorMessage", "Userul exista deja");
 			return mv;
