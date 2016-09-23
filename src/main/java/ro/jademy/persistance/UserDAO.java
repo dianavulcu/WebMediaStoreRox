@@ -98,6 +98,7 @@ public class UserDAO {
 				importFile.setProperty("user[" + i + "].password", user.getPassword());
 				importFile.setProperty("user[" + i + "].emailAddress", user.getEmailAddress());
 				importFile.setProperty("user[" + i + "].uuid", user.getUUID());
+				importFile.setProperty("user[" + i + "].customer", "REGULAR");
 				FileOutputStream fos;
 				try {
 					fos = new FileOutputStream("user.properties");
@@ -125,6 +126,7 @@ public class UserDAO {
 				String dbUsername = importFile.getProperty("user[" + i + "].username");
 				String dbPassword = importFile.getProperty("user[" + i + "].password");
 				String dbEmailAddress = importFile.getProperty("user[" + i + "].emailAddress");
+				UserType dbUserType = UserType.valueOf(importFile.getProperty("user[" + i + "].customer"));
 				User user = new User(dbUsername, dbPassword, dbEmailAddress, uuid, dbUserType);
 				return user;
 			}
