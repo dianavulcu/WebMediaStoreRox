@@ -1,0 +1,9 @@
+<hmtl>
+	<body>
+		<h3>Salut ${user.username}, aceasta este comanda ta:<h3>
+			#foreach ($cartItem in $shoppingCartitems)
+				<h5>${cartItem.media.title} --- ${cartItem.quantity} bucati<h5>
+			#end			
+		<h3>Spor la cumparaturi :)</h3>
+	</body>
+</html>

@@ -17,7 +17,7 @@ public class ShoppingCartService {
 	ShoppingCartDAO shoppingCartDAO;
 	
 	public void saveShoppingCart(ShoppingCart shoppingCart, User user){
-		//mailService.sendMail(user.getEmailAddress(), "shopping cart","cosul este ..." , false);
+		mailService.sendCheckoutMail(shoppingCart, user);
 		shoppingCartDAO.createCart(shoppingCart, user);
 	}
 }

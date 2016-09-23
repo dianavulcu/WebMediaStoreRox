@@ -13,6 +13,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
+import ro.jademy.domain.entities.ShoppingCart;
 import ro.jademy.domain.entities.User;
 
 @Service
@@ -83,12 +84,34 @@ public class MailService {
 
 			model.put("user", user);
 
-			helper.setText(VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "new-password.vm",
-					CHARSET_UTF8, model), true);
+			helper.setText(
+					VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "new-password.vm", CHARSET_UTF8, model),
+					true);
 			javaMailSender.send(mail);
 		} catch (Exception e) {
 			throw new RuntimeException("Cannot send mail", e);
 		}
+	}
+
+	public void sendCheckoutMail(ShoppingCart shoppingCart, User user) {
+		try {
+			MimeMessage mail = javaMailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(mail, true);
+			helper.setTo(user.getEmailAddress());
+			helper.setSubject(user.getUsername() + ", here is you shopping cart, total = " + shoppingCart.getTotalPrice());
+
+			Map model = new HashMap<>();
+			model.put("user", user);
+			model.put("shoppingCartitems", shoppingCart.getCartItems());
+
+			helper.setText(
+					VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "checkout.vm", CHARSET_UTF8, model),
+					true);
+			javaMailSender.send(mail);
+		} catch (Exception e) {
+			throw new RuntimeException("Cannot send mail", e);
+		}
+
 	}
 
 }
