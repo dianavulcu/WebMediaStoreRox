@@ -54,7 +54,10 @@ public class CartController {
 		ShoppingCart shoppingCart = (ShoppingCart) request.getSession().getAttribute("shoppingCart");
 		if(shoppingCart == null){
 			return new ModelAndView("displayCart");
-		}	
+		}
+		if(shoppingCart.getCartItems().size()==0){
+			return new ModelAndView("displayCart");
+		}
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
 		shoppingCartService.saveShoppingCart(shoppingCart, currentUser);
 		request.getSession().setAttribute("shoppingCart", new ShoppingCart());

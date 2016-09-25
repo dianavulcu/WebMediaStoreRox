@@ -17,15 +17,19 @@
   <table class="table table-condensed">
     <thead>
       <tr>
-        <th>Nr.</th>
-        <th>Denumire</th>
-        <th>Cantitate</th>
+        <th>Nr.curent </th>
+        <th>Denumire  </th>
+        <th>Cantitate </th>
         <th>Pret</th>
         </tr>
     </thead>
     <tbody>
       #foreach ($cartItem in $shoppingCartitems)
-      <tr><h5><td>$velocityCount</td><td>  </td><td>${cartItem.media.title}</td><td>  </td><td>${cartItem.quantity} bucati</td><td>  </td><td>${cartItem.media.price}</td><h5></tr>
+      <tr>
+      <h5><td>$velocityCount</td>
+      <td>${cartItem.media.title}</td><td></td>
+      <td>${cartItem.quantity} bucati</td><td></td>
+      <td>${cartItem.media.price}</td><h5></tr>
       #end   
     </tbody>
   </table>
