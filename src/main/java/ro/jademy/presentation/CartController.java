@@ -18,7 +18,10 @@ import ro.jademy.domain.service.ShoppingCartService;
 public class CartController {
 	
 	@Autowired
-	ShoppingCartService shoppingCartService;   
+	ShoppingCartService shoppingCartService;  
+	
+	@Autowired
+	MediaService mediaService;   
 	
 	@RequestMapping("/addProductToCart")
 	public ModelAndView addProductToCart(String productCode, int cantitate, ProductType productType,
@@ -26,8 +29,8 @@ public class CartController {
 		if (cantitate == 0) {
 			ModelAndView mv = new ModelAndView("redirect:productList/" + productType.toString());
 			return mv;
-		}
-		MediaService mediaService = new MediaService();
+		}	
+		
 		Media media = mediaService.getProductByProductTypeAndCode(productType, productCode);
 		ShoppingCart shoppingCart = (ShoppingCart)request.getSession().getAttribute("shoppingCart");
 		if(shoppingCart == null){
@@ -40,6 +43,7 @@ public class CartController {
 		return mv;
 
 	}
+	
 	@RequestMapping("/displayCart")
 	public ModelAndView displayCart(){
 		return new ModelAndView("displayCart");
@@ -48,6 +52,9 @@ public class CartController {
 	@RequestMapping("/checkout")
 	public ModelAndView checkout(HttpServletRequest request){
 		ShoppingCart shoppingCart = (ShoppingCart) request.getSession().getAttribute("shoppingCart");
+		if(shoppingCart == null){
+			return new ModelAndView("displayCart");
+		}	
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
 		shoppingCartService.saveShoppingCart(shoppingCart, currentUser);
 		request.getSession().setAttribute("shoppingCart", new ShoppingCart());

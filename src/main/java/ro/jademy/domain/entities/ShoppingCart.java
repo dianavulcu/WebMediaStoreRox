@@ -35,7 +35,7 @@ public class ShoppingCart {
 	}
 	
 	public void addToCart (Media media, int quantity){
-	addToCart(new CartItem (media,quantity));
+		addToCart(new CartItem (media,quantity));
 	}
 
 	public int getTotalItems() {

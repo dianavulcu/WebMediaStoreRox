@@ -24,6 +24,11 @@ public class ShoppingCartDAO {
 
 	private ShoppingCartDAO() {
 		importFile = new Properties() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public synchronized Enumeration<Object> keys() {
 				return Collections.enumeration(new TreeSet<Object>(keySet()));
 			}
@@ -61,7 +66,6 @@ public class ShoppingCartDAO {
 		} catch (IOException e) {
 			throw new RuntimeException("Cannot save shopping-carts.properties", e);
 		}
-
 	}
 
 	private int getNextCartIndex() {
