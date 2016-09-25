@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ro.jademy.domain.entities.User;
+import ro.jademy.domain.entities.UserType;
 import ro.jademy.domain.service.MailService;
 import ro.jademy.domain.service.UserService;
 
@@ -34,7 +35,7 @@ public class RegisterController {
 		if (userName == null || password == null || repeatPassword == null || userName.trim().isEmpty()
 				|| password.trim().isEmpty() || repeatPassword.trim().isEmpty()) {
 			ModelAndView mv = new ModelAndView("registerMenu");
-			mv.addObject("errorMessage", "Campurile sunt obligatorii");
+			mv.addObject("errorMessage", "Campurile marcate cu * sunt obligatorii");
 			return mv;
 		}
 
@@ -43,17 +44,17 @@ public class RegisterController {
 			mv.addObject("errorMessage", "Parolele nu se potrivesc");
 			return mv;
 		}
-		// UserService userService = new UserService();
-		if ((new UserService()).getUserByUsername(userName) != null) {
+		
+		if (userService.getUserByUsername(userName) != null) {
 			ModelAndView mv = new ModelAndView("registerMenu");
-			mv.addObject("errorMessage", "Userul exista deja");
+			mv.addObject("errorMessage", "Acest user exista deja");
 			return mv;
 		}
 
-		User savedUser = userService.saveUser(new User(userName, password, emailAddress));
+		User savedUser = userService.saveUser(new User(userName, password, emailAddress, UserType.REGULAR));
 		mailService.sendRegistrationMail(savedUser);
-		ModelAndView mv = new ModelAndView("login", "errorMessage",
-				"Userul a fost creat cu succes. Verifica-ti si emailul.");
+		ModelAndView mv = new ModelAndView("login");
+		mv.addObject("errorMessage","Userul a fost creat cu succes. Verifica-ti emailul.");
 		return mv;
 	}
 

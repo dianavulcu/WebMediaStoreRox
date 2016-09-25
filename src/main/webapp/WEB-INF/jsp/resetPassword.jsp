@@ -57,7 +57,7 @@
 
 				<div class="jumbotron">
 					<div class="row">
-						<h3>Introdu o nouă parolă pentru userul ${user.username}:</h3>
+						<h3>Introduceti o nouă parolă pentru userul ${user.username}:</h3>
 
 						<div class="col-xs-4">
 
@@ -70,7 +70,7 @@
 								<div class="col-xs-12">
 									<div class="form-group">
 										<label for="repeatPassword">Repeat Password:</label> <input
-											type="text" name="userName" class="form-control"
+											type="text" name="repeatPassword" class="form-control"
 											id="repeatPassword" placeholder="Repeat Password">
 									</div>
 

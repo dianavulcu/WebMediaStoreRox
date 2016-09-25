@@ -35,30 +35,26 @@ public class ForgotController {
 			return mv;
 		}
 
-		if (userService.getUserByUsername(userName) == null) {
+		User user = userService.getUserByUsername(userName);
+
+		if (user == null) {
 			ModelAndView mv = new ModelAndView("forgotPassword");
 			mv.addObject("errorMessage", "Userul nu exista.");
 			return mv;
 		}
-		if (!(userService.getUserByUsername(userName).getEmailAddress().equals(emailAddress))) {
+		if (!(user.getEmailAddress().equals(emailAddress))) {
 			ModelAndView mv = new ModelAndView("forgotPassword");
-			mv.addObject("errorMessage", "Adresa de email nu corespunde cu userul.");
-			return mv;
-		}
-		if ((userService.getUserByUsername(userName) != null)
-				&& (userService.getUserByUsername(userName).getEmailAddress().equals(emailAddress))) {
-
-			String url = request.getRequestURL().toString();
-			System.out.println("Current URL is:" + url);
-
-			mailService.sendPasswordResetMail(userService.getUserByUsername(userName), url);
-
-			ModelAndView mv = new ModelAndView("login", "errorMessage",
-					"Dati click pe linkul primit pe mail pentru a ve reseta parola.");
+			mv.addObject("errorMessage", "Adresa de email nu corespunde cu adresa acestui user.");
 			return mv;
 		}
 
-		return null;
+		String url = request.getRequestURL().toString();
+		mailService.sendPasswordResetMail(user, url);
+
+		ModelAndView mv = new ModelAndView("login");
+		mv.addObject("errorMessage", "Dati click pe linkul primit pe email pentru a va reseta parola.");
+		return mv;
+
 	}
 
 	@RequestMapping("/generatePassword/{uuid}")
@@ -69,19 +65,25 @@ public class ForgotController {
 
 	@RequestMapping("/resetPassword")
 	public ModelAndView saveNewPassword(String uuid, String password, String repeatPassword) {
+		User user = userService.getUserByUuid(uuid);
 		if (password == null || repeatPassword == null || password.trim().isEmpty()
 				|| repeatPassword.trim().isEmpty()) {
-			return new ModelAndView("resetPassword", "errorMessage", "Campurile sunt obligatorii");
+			ModelAndView mv = new ModelAndView("resetPassword");
+			mv.addObject("user", user);
+			mv.addObject("errorMessage", "Campurile sunt obligatorii !");
+			return mv;
 		}
 		if (!(password.equals(repeatPassword))) {
-			return new ModelAndView("resetPassword", "errorMessage", "Parolele nu se potrivesc");
+			ModelAndView mv = new ModelAndView("resetPassword");
+			mv.addObject("user", user);
+			mv.addObject("errorMessage", "Parolele nu se potrivesc");
+			return mv;
 		}
-		
-		User user = userService.getUserByUuid(uuid);
+
 		userService.updateUserPassword(user, password);
 		userService.resetUuid(user);
 		mailService.sendNewPasswordMail(user);
-		
-		return new ModelAndView("login", "errorMessage", "V-am trimis mail cu noua parola. Logati-va din nou");
+
+		return new ModelAndView("login", "errorMessage", "V-am trimis email cu noua parola. Logati-va din nou");
 	}
 }

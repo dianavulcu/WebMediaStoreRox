@@ -46,7 +46,7 @@
 
 							<div class="col-xs-4">
 								<div class="form-group">
-									<label for="username"><h4>Username:</h4></label> <input type="text"
+									<label for="username"><h4>*Username:</h4></label> <input type="text"
 										name="userName" class="form-control" id="userName"
 										placeholder="Enter Username">
 								</div>
@@ -54,7 +54,7 @@
 									<div class="col-xs-12">
 										<div class="form-group">
 											<label for="email"><h4>Email:</h4></label> <input type="email"
-												name="emailAddrress" class="form-control" id="emailAddress"
+												name="emailAddress" class="form-control" id="emailAddress"
 												placeholder="Enter Email">
 										</div>
 
@@ -63,7 +63,7 @@
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="form-group">
-											<label for="password"><h4>Password:</h4></label> <input type="password"
+											<label for="password"><h4>*Password:</h4></label> <input type="password"
 												name="password" class="form-control" id="password"
 												placeholder="Enter Password">
 										</div>
@@ -73,7 +73,7 @@
 									<div class="row">
 									<div class="col-xs-12">
 										<div class="form-group">
-											<label for="repeatPassword"><h4>Repeat password:</h4></label> <input type="password"
+											<label for="repeatPassword"><h4>*Repeat password:</h4></label> <input type="password"
 												name="repeatPassword" class="form-control" id="repeatPassword"
 												placeholder="Repeat Password">
 										</div>

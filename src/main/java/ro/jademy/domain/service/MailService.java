@@ -69,7 +69,7 @@ public class MailService {
 					CHARSET_UTF8, model), true);
 			javaMailSender.send(mail);
 		} catch (Exception e) {
-			throw new RuntimeException("Cannot send mail", e);
+			throw new RuntimeException("Cannot send email", e);
 		}
 	}
 
@@ -89,7 +89,7 @@ public class MailService {
 					true);
 			javaMailSender.send(mail);
 		} catch (Exception e) {
-			throw new RuntimeException("Cannot send mail", e);
+			throw new RuntimeException("Cannot send email", e);
 		}
 	}
 
