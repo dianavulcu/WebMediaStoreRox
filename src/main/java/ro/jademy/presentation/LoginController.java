@@ -15,9 +15,9 @@ public class LoginController {
 	public String home() {
 		return "login";
 	}
-	
+
 	@RequestMapping("/login")
-	public ModelAndView login(User user, HttpServletRequest request){
+	public ModelAndView login(User user, HttpServletRequest request) {
 		if (user.getUsername() != null && !user.getUsername().trim().isEmpty()) {
 			User aUser = (new UserService()).checkPassword(user);
 			if (aUser != null) {
@@ -27,6 +27,6 @@ public class LoginController {
 			return new ModelAndView("login", "errorMessage", "Autentificare gresita!");
 		}
 		return new ModelAndView("login", "errorMessage", "");
-	}	
-	
+	}
+
 }

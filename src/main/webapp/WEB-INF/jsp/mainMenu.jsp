@@ -8,7 +8,7 @@
 <title>Meniu-Principal</title>
 </head>
 <body>
-<div style="float: right">Salut ${aUser.username}</div>
+<div style="float: right">Salut ${currentUser.username}</div>
 <a href="productList/CD"><h6>1.Listă CD-uri</h6></a>
 <a href="productList/DVD"><h6>2.Listă DVD-uri</h6></a>
 <a href="productList/EBOOK"><h6>3.Listă Ebook</h6></a>

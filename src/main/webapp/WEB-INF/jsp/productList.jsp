@@ -39,6 +39,7 @@
 	<h6>TOTAL: ${fn:length(shoppingCart.cartItems)} produse, cantitate: ${shoppingCart.totalItems}, Total: ${shoppingCart.totalPrice} RON</h6>
 <a href="/mainMenu"><h6>Inapoi la meniul principal</h6></a>
 <a href="/displayCart"><h6>Afișeaza coșul</h6></a>
+<a href="/logout"><h6>Logout</h6></a>
 	
 </body>
 </html>

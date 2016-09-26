@@ -11,7 +11,7 @@
 </head>
 <body>
 <c:forEach items="${shoppingCart.cartItems}" var="cartItem" varStatus="status">
-${status.index+1}. ${cartItem.media.title} - ${cartItem.media.description}   Cantitate: ${cartItem.quantity} - Pret: ${cartItem.totalPrice} RON<br/>
+${status.index+1}. ${cartItem.media.title} - ${cartItem.media.description}     Cantitate: ${cartItem.quantity} - Pret: ${cartItem.totalPrice} RON<br/>
 </c:forEach>
 <br/>
 <a href="/checkout">0. Check out</a>
