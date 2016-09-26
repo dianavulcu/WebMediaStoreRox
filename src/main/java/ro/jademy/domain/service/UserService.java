@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import ro.jademy.domain.entities.User;
 import ro.jademy.persistance.UserDAO;
+import ro.jademy.persistance.UserDBDAO;
 
 
 @Service
@@ -24,11 +25,11 @@ public class UserService {
 	}
 
 	public User getUserByUsername(String username) {
-		return UserDAO.getInstance().getUserByUsername(username);
+		return UserDBDAO.getInstance().getUserByUsername(username);
 	}
 
 	public User saveUser(User user) {
-		UserDAO.getInstance().createUser(user);
+		UserDBDAO.getInstance().createUser(user);
 		return user;
 	}
 		
