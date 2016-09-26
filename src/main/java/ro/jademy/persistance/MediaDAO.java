@@ -45,7 +45,7 @@ public class MediaDAO {
 		return soleInstance;
 	}
 
-	public List<Media> getAllMedia(ProductType productType) {
+	public List<Media> getMediaByProductType(ProductType productType) {
 		List<Media> aList = new ArrayList<>();
 		int i = 0;
 		while (true) {
@@ -84,15 +84,6 @@ public class MediaDAO {
 	}
 
 	public Media getProductbyCode(ProductType productType, String productCode) {
-		// int i=0;
-		// for (Entry pEntry:importFile.entrySet()){
-		// i++;
-		// if (pEntry.getValue().equals(productCode) &&
-		// ((String)pEntry.getKey()).endsWith(".code")){
-		//
-		// }
-		// }
-		// return null;
 		Media media = null;
 		int i = 0;
 		while (true) {
@@ -125,8 +116,8 @@ public class MediaDAO {
 					String dbAuthor = importFile.getProperty(productType.name().toLowerCase() + "[" + i + "].author");
 					media = new EBOOK.Builder().title(dbTitle).author(dbAuthor).price(dbPrice).code(dbCode)
 							.genre(dbGenre).build();
-					return media;
 				}
+				return media;
 			}
 		}
 	}

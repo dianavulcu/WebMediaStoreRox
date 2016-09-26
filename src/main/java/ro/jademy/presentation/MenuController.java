@@ -9,9 +9,7 @@ import ro.jademy.domain.entities.User;
 public class MenuController {
 	@RequestMapping("/mainMenu")
 	public ModelAndView mainMenu(User aUser){
-		ModelAndView mv = new ModelAndView("mainMenu");
-		mv.addObject(aUser);
-		return mv;
+		return new ModelAndView("mainMenu");
 	}
 
 }

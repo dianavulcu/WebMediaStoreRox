@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Media Store</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Media Store</h2>
+  <h4>Salut ${user.username}, aceasta este comanda ta:<h4>
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Nr.curent </th>
+        <th>Denumire  </th>
+        <th>Cantitate </th>
+        <th>Pret</th>
+        </tr>
+    </thead>
+    <tbody>
+      #foreach ($cartItem in $shoppingCartitems)
+      <tr>
+      <h5><td>$velocityCount</td>
+      <td>${cartItem.media.title}</td><td></td>
+      <td>${cartItem.quantity} bucati</td><td></td>
+      <td>${cartItem.media.price}</td><h5></tr>
+      #end   
+    </tbody>
+  </table>
+  <br/> 
+   <p style="float:left; color:blue">Total preţ: ${total}</p>
+   <br/>
+  <h3>Spor la cumpărături !</h3>
+</div>
+
+</body>
+</html>
+

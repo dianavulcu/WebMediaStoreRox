@@ -1,23 +1,18 @@
 package ro.jademy.domain.service;
 
+import java.util.UUID;
+
+import org.springframework.stereotype.Service;
+
 import ro.jademy.domain.entities.User;
 import ro.jademy.persistance.UserDAO;
 
+
+@Service
 public class UserService {
-//	public boolean checkPassword(User user) {
-//		User dbUser = getUser(user.getUsername());
-//
-//		if (dbUser == null) {
-//			return false;
-//		}
-//		if (dbUser.getPassword().equals(user.getPassword())) {
-//			return true;
-//		}
-//		return false;
-//	}
 
 	public User checkPassword(User user) {
-		User dbUser = getUser(user.getUsername());
+		User dbUser = getUserByUsername(user.getUsername());
 
 		if (dbUser == null) {
 			return dbUser;
@@ -28,27 +23,31 @@ public class UserService {
 		return null;
 	}
 
-	public User getUser(String username) {
-		UserDAO userDAO = UserDAO.getInstance();
-		return userDAO.getUserByUsername(username);
+	public User getUserByUsername(String username) {
+		return UserDAO.getInstance().getUserByUsername(username);
 	}
 
 	public User saveUser(User user) {
 		UserDAO.getInstance().createUser(user);
-		return null;
+		return user;
 	}
 		
-	public void updateUserService(User user){
-		UserDAO userUpdated = UserDAO.getInstance();
-		userUpdated.updateUser(user);
-		
+	public void updateUser(User user){
+		UserDAO.getInstance().updateUser(user);
 	}
 	
-	public User getUuidService(String uuid){
-		UserDAO userByUuid = UserDAO.getInstance();
-		return userByUuid.getUserByUuid(uuid);
-		
+	public User getUserByUuid(String uuid) {
+		return UserDAO.getInstance().getUserByUuid(uuid);
 	}
-	
+
+	public void updateUserPassword(User user, String password) {
+		user.setPassword(password);
+		updateUser(user);	
+	}
+
+	public void resetUuid(User user) {
+		user.setUuid(UUID.randomUUID().toString());	
+		updateUser(user);	
+	}
 	
 }

@@ -23,7 +23,7 @@ public class LoginController {
 			if (aUser != null) {
 				request.getSession().setAttribute("currentUser", aUser);
 				return new ModelAndView("redirect:mainMenu");
-			}
+			}	
 			return new ModelAndView("login", "errorMessage", "Autentificare gresita!");
 		}
 		return new ModelAndView("login", "errorMessage", "");

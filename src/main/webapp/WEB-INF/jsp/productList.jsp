@@ -14,16 +14,44 @@
 <title>Product List</title>
 </head>
 <body>
+<div class="bs-example">
+		<nav role="navigation" class="navbar navbar-default">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" data-target="#navbarCollapse"
+					data-toggle="collapse" class="navbar-toggle">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a href="#" class="navbar-brand">Media Store </a>
+			</div>
+			<!-- Collection of nav links and other content for toggling -->
+			<div id="navbarCollapse" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Listă produse</a></li>
+
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"> <span class="glyphicon glyphicon-user"></span> Salut ${currentUser.username}</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+ <div class="container">
+		<div class="jumbotron">
+			<div class="bs-example">
 	<c:forEach items="${aList}" var="aMedia">
 		<form action="/addProductToCart" method="post">
 			<div class="row">
-				<div class="col-xs-1">${aMedia.title}</div>
+				<div class="col-xs-2">${aMedia.title}</div>
 				<div class="col-xs-1">${aMedia.description}</div>
 				<div class="col-xs-1">${aMedia.price}</div>
 				<div class="col-xs-1">${aMedia.genre}</div>
 				<div class="col-xs-1">
 					<div class="form-group">
-						<input class="form-control" type="text" value="0" name="cantitate" />
+						<input class="form-control" type="text" value="1" name="cantitate" />
 					</div>
 				</div>
 				<div class="col-xs-2">
@@ -37,9 +65,10 @@
 		</form>
 	</c:forEach>
 	<h6>TOTAL: ${fn:length(shoppingCart.cartItems)} produse, cantitate: ${shoppingCart.totalItems}, Total: ${shoppingCart.totalPrice} RON</h6>
-<a href="/mainMenu"><h6>Inapoi la meniul principal</h6></a>
-<a href="/displayCart"><h6>Afișeaza coșul</h6></a>
-<a href="/logout"><h6>Logout</h6></a>
-	
+<a href="/mainMenu"><button class="btn btn-warning">Înapoi la meniul principal</button></a>
+&nbsp&nbsp
+<span><a href="/displayCart"><button class="btn btn-success">Afișează coșul</button></a></span>
+
+</div>	
 </body>
 </html>
