@@ -30,7 +30,7 @@ public class CartItem {
 		this.quantity = quantity;
 	}
 
-	public double getCartItemTotalPrice() {
+	public double getTotalPrice() {
 		return getMedia().getPrice()*getQuantity();
 	}
 	
