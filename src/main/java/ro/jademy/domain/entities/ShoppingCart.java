@@ -34,7 +34,7 @@ public class ShoppingCart {
 		double price = 0;
 		MathContext mc = new MathContext(8);
 		for (CartItem cartItem : cartItems) {
-			price += cartItem.getCartItemTotalPrice();
+			price += cartItem.getTotalPrice();
 		}
 		BigDecimal bgdPrice = new BigDecimal(price, mc);
 		return String.format(Locale.ENGLISH,"%,.2f", bgdPrice.setScale(2, BigDecimal.ROUND_HALF_UP));
