@@ -34,7 +34,7 @@ public class UserService {
 	}
 		
 	public void updateUser(User user){
-		UserDAO.getInstance().updateUser(user);
+		UserDBDAO.getInstance().updateUser(user);
 	}
 	
 	public User getUserByUuid(String uuid) {
