@@ -2,6 +2,7 @@
 		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
+<%@include file="templates/header.jsp" %>
 <div class="container">
 	<div class="jumbotron">
 		<h1>Media Store</h1>
@@ -55,3 +56,4 @@
 		</div>
 	</div>
 </form>
+<%@include file="templates/footer.jsp" %>
