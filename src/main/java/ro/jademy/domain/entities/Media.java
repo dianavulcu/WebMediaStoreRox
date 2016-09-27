@@ -6,6 +6,7 @@ public abstract class Media {
 	private String code;
 	private MediaGenre genre;
 
+	public Media(){}
 	public Media(String title, double price, String code, MediaGenre genre) {
 		this.title = title;
 		this.price = price;

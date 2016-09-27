@@ -10,6 +10,10 @@ public class CD extends Media {
 		this.artist = artist;
 	}
 
+	public CD() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getArtist() {
 		return artist;
 	}

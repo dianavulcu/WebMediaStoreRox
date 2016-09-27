@@ -11,6 +11,10 @@ public class EBOOK extends Media{
 		// TODO Auto-generated constructor stub
 	}
 
+	public EBOOK() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub

@@ -12,6 +12,10 @@ public class DVD extends Media{
 		this.productionLabel = productionLabel;		
 	}
 
+	public DVD() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getDirectors() {
 		return directors;
 	}
