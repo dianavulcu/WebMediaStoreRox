@@ -9,9 +9,10 @@ import java.util.Properties;
 import ro.jademy.domain.entities.User;
 import ro.jademy.domain.entities.UserType;
 
-public class UserDBDAO {
+public class UserDBDAO implements UserDAO {
 
 	private Properties importFile;
+	private Connection connection;
 	private static UserDBDAO soleInstance = new UserDBDAO();
 
 	private UserDBDAO() {
@@ -21,8 +22,14 @@ public class UserDBDAO {
 		return soleInstance;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ro.jademy.persistance.UserDAO#getUserByUsername(java.lang.String)
+	 */
+	@Override
 	public User getUserByUsername(String username) {
-		try (Connection connection = ConnectionManager.getConnection()) {
+		try {
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM  USERS WHERE USERNAME = ?");
 			statement.setString(1, username);
 			ResultSet result = statement.executeQuery();
@@ -41,8 +48,15 @@ public class UserDBDAO {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ro.jademy.persistance.UserDAO#createUser(ro.jademy.domain.entities.User)
+	 */
+	@Override
 	public void createUser(User user) {
-		try (Connection connection = ConnectionManager.getConnection()) {
+		try {
 			PreparedStatement statement = connection
 					.prepareStatement("INSERt INTO USERS (USERNAME, PASSWORD, EMAIL) VALUES (?,?,?)");
 			statement.setString(1, user.getUsername());
@@ -55,32 +69,36 @@ public class UserDBDAO {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ro.jademy.persistance.UserDAO#updateUser(ro.jademy.domain.entities.User)
+	 */
+	@Override
 	public void updateUser(User user) {
-		try (Connection connection = ConnectionManager.getConnection()) {
-			PreparedStatement getStatement = connection.prepareStatement(
-					"SELECT * FROM USERS WHERE USERNAME = ?");
+		try {
+			PreparedStatement getStatement = connection.prepareStatement("SELECT * FROM USERS WHERE USERNAME = ?");
 			getStatement.setString(1, user.getUsername());
 			ResultSet rs = getStatement.executeQuery();
 			if (!rs.next()) {
 				return;
 			}
-			
-			PreparedStatement putStatement = connection.prepareStatement(
-					"UPDATE USERS SET EMAIL=?  WHERE USERNAME =?; "+
-					"UPDATE USERS SET PASSWORD=?  WHERE USERNAME =?; "
-					);
+
+			PreparedStatement putStatement = connection
+					.prepareStatement("UPDATE USERS SET EMAIL=?, PASSWORD=? WHERE USERNAME =?");
 			putStatement.setString(1, user.getEmailAddress());
-			putStatement.setString(2, user.getUsername());
-			putStatement.setString(3, user.getPassword());
-			putStatement.setString(4, user.getUsername());
+			putStatement.setString(2, user.getPassword());
+			putStatement.setString(3, user.getUsername());
 			putStatement.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			throw new RuntimeException("Cannot connect to database", e);
 		}
 
 	}
 
+	@Override
 	public User getUserByUuid(String uuid) {
 		int i = 0;
 		while (true) {

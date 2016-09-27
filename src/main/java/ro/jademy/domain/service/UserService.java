@@ -2,15 +2,21 @@ package ro.jademy.domain.service;
 
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ro.jademy.domain.entities.User;
 import ro.jademy.persistance.UserDAO;
 import ro.jademy.persistance.UserDBDAO;
+import ro.jademy.persistance.UserPropDAO;
+
 
 
 @Service
 public class UserService {
+	
+	@Autowired
+	ServiceLocator serviceLocator;
 
 	public User checkPassword(User user) {
 		User dbUser = getUserByUsername(user.getUsername());
@@ -25,7 +31,9 @@ public class UserService {
 	}
 
 	public User getUserByUsername(String username) {
-		return UserDBDAO.getInstance().getUserByUsername(username);
+		UserDAO userDao = serviceLocator.getUserDao();
+		return userDao.getUserByUsername(username);
+		
 	}
 
 	public User saveUser(User user) {
@@ -38,7 +46,7 @@ public class UserService {
 	}
 	
 	public User getUserByUuid(String uuid) {
-		return UserDAO.getInstance().getUserByUuid(uuid);
+		return UserPropDAO.getInstance().getUserByUuid(uuid);
 	}
 
 	public void updateUserPassword(User user, String password) {

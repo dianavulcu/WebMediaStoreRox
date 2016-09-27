@@ -1,6 +1,6 @@
 package ro.jademy.domain.entities;
 
-import ro.jademy.persistance.UserDAO;
+import ro.jademy.persistance.UserPropDAO;
 
 public class User {
 	private String username;
