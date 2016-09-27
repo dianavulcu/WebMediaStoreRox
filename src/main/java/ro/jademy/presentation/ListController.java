@@ -25,6 +25,7 @@ public class ListController {
 		List<? extends Media> aList = mediaService.getAllMedia(productType);
 		ModelAndView mv = new ModelAndView("productList", "aList", aList);
 		mv.addObject("productType", productType);
+		
 		return mv;
 	}
 }
