@@ -1,4 +1,4 @@
-package ro.jademy.domain.service;
+package ro.jademy.persistance;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
@@ -6,8 +6,6 @@ import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import ro.jademy.persistance.UserDBDAO;
 
 public class UserDAOInvocationHandler implements InvocationHandler {
 

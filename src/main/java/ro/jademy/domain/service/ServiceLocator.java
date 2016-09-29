@@ -6,6 +6,7 @@ import java.lang.reflect.Proxy;
 import org.springframework.stereotype.Service;
 
 import ro.jademy.persistance.UserDAO;
+import ro.jademy.persistance.UserDAOInvocationHandler;
 import ro.jademy.persistance.UserPropDAO;
 
 @Service
