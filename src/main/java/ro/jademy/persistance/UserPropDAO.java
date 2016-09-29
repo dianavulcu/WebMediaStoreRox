@@ -12,12 +12,12 @@ import java.util.TreeSet;
 import ro.jademy.domain.entities.User;
 import ro.jademy.domain.entities.UserType;
 
-public class UserDAO {
+public class UserPropDAO implements UserDAO {
 
 	private Properties importFile;
-	private static UserDAO soleInstance = new UserDAO();
+	private static UserPropDAO soleInstance = new UserPropDAO();
 
-	private UserDAO() {
+	private UserPropDAO() {
 		importFile = new Properties() {
 			public synchronized Enumeration<Object> keys() {
 				return Collections.enumeration(new TreeSet<Object>(keySet()));
@@ -31,7 +31,7 @@ public class UserDAO {
 		}
 	}
 
-	public static UserDAO getInstance() {
+	public static UserPropDAO getInstance() {
 		return soleInstance;
 	}
 
