@@ -10,7 +10,7 @@ import ro.jademy.domain.entities.User;
 import ro.jademy.domain.entities.UserType;
 
 public class UserDBDAO implements UserDAO {
-
+	
 	private Properties importFile;
 	private Connection connection;
 	private static UserDBDAO soleInstance = new UserDBDAO();
@@ -28,6 +28,7 @@ public class UserDBDAO implements UserDAO {
 	 * @see ro.jademy.persistance.UserDAO#getUserByUsername(java.lang.String)
 	 */
 	@Override
+	@Postgres(masina = "localhost")
 	public User getUserByUsername(String username) {
 		try {
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM  USERS WHERE USERNAME = ?");
@@ -55,6 +56,7 @@ public class UserDBDAO implements UserDAO {
 	 * ro.jademy.persistance.UserDAO#createUser(ro.jademy.domain.entities.User)
 	 */
 	@Override
+	@Postgres(masina = "85.88.76.12")
 	public void createUser(User user) {
 		try {
 			PreparedStatement statement = connection

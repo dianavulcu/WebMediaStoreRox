@@ -11,6 +11,7 @@ public class WebMediaStoreApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		
 	}
 
 }

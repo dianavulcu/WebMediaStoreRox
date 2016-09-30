@@ -37,12 +37,12 @@ public class UserService {
 	}
 
 	public User saveUser(User user) {
-		UserDBDAO.getInstance().createUser(user);
+		serviceLocator.getUserDao().createUser(user);
 		return user;
 	}
 		
 	public void updateUser(User user){
-		UserDBDAO.getInstance().updateUser(user);
+		serviceLocator.getUserDao().updateUser(user);
 	}
 	
 	public User getUserByUuid(String uuid) {
@@ -58,5 +58,4 @@ public class UserService {
 		user.setUuid(UUID.randomUUID().toString());	
 		updateUser(user);	
 	}
-	
 }

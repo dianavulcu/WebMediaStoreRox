@@ -24,8 +24,6 @@ public class ServiceLocator {
 		if (daoType.equals("PROP")) {
 			return UserPropDAO.getInstance();
 		}
-		throw new UnsupportedOperationException(
-				String.format("wrong system propriety %s value %s", "DAO_IMPL", daoType));
-
+		throw new WrongApplicationConfiguration(String.format("wrong system propriety %s value %s", "DAO_IMPL", daoType));
 	}
 }

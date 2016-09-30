@@ -21,7 +21,11 @@ public class UserDAOInvocationHandler implements InvocationHandler {
 		Method localMethod = userDBDAO.getClass().getMethod(method.getName(), argsClasses);
 		Field field = userDBDAO.getClass().getDeclaredField("connection");
 		field.setAccessible(true);
-		field.set(userDBDAO, getConnection());
+		if(method.isAnnotationPresent(Postgres.class)) {
+			field.set(userDBDAO, getConnection());
+		} else {
+			field.set(userDBDAO, getConnection());
+		}
 		Object invoke = localMethod.invoke(userDBDAO, args);
 		((Connection)field.get(userDBDAO)).close();
 		field.set(userDBDAO, null);

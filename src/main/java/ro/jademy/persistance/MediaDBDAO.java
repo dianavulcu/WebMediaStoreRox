@@ -54,10 +54,7 @@ public class MediaDBDAO {
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM  MEDIA WHERE PRODUCT_TYPE = ?");
 			statement.setString(1, productType.name());
 			ResultSet resultSet = statement.executeQuery();
-			if (!resultSet.next()) {
-				return new ArrayList();
-			}
-			resultSet.beforeFirst();
+
 			List<Media> aList = new ArrayList<>();
 
 			while (resultSet.next()) {
