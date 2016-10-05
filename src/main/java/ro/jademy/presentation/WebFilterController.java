@@ -32,25 +32,20 @@ public class WebFilterController implements Filter {
 			throws ServletException, IOException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
-		System.out.println("Request URI" + request.getRequestURI().toString()); //debug - arata calea
-		User currentUser =(User) request.getSession().getAttribute("currentUser");
-		if (request.getRequestURI().endsWith("/login") ||
-			request.getRequestURI().endsWith("/header.jsp") ||
-			request.getRequestURI().endsWith("/footer.jsp") ||
-			request.getRequestURI().endsWith("/login.jsp") ||
-			request.getRequestURI().endsWith("/favicon.ico") ||
-			request.getRequestURI().endsWith("/register") ||
-			request.getRequestURI().endsWith("/registerMenu.jsp") ||
-			request.getRequestURI().endsWith("/registerUser") ||
-			request.getRequestURI().endsWith("/forgotPassword") ||
-			request.getRequestURI().endsWith("/forgotPassword.jsp") ||
-			request.getRequestURI().endsWith("/generatePassword/*") ||
-			request.getRequestURI().endsWith("/resetPassword") ||
-			request.getRequestURI().endsWith("/resetPassword.jsp")) {
-			System.out.println("Am intrat pe url-urile interzise"); //debug - arata ca intra pe exceptii de uri
+		User currentUser = (User) request.getSession().getAttribute("currentUser");
+		if (request.getRequestURI().endsWith("/login") || request.getRequestURI().endsWith("/header.jsp")
+				|| request.getRequestURI().endsWith("/footer.jsp") || request.getRequestURI().endsWith("/login.jsp")
+				|| request.getRequestURI().endsWith("/favicon.ico") || request.getRequestURI().endsWith("/register")
+				|| request.getRequestURI().endsWith("/registerMenu.jsp")
+				|| request.getRequestURI().endsWith("/registerUser")
+				|| request.getRequestURI().endsWith("/forgotPassword")
+				|| request.getRequestURI().endsWith("/forgotPassword.jsp")
+				|| request.getRequestURI().endsWith("/generatePassword/*")
+				|| request.getRequestURI().endsWith("/resetPassword")
+				|| request.getRequestURI().endsWith("/resetPassword.jsp")) {
 		} else if (currentUser == null) {
 			response.sendRedirect(request.getContextPath() + "/login");
-			}
+		}
 
 		chain.doFilter(req, res);
 	}
