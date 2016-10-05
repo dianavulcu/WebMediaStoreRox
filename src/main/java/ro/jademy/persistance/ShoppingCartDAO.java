@@ -22,7 +22,7 @@ public class ShoppingCartDAO {
 	private Properties importFile;
 	private static ShoppingCartDAO soleInstance = new ShoppingCartDAO();
 
-	private ShoppingCartDAO() {
+	public ShoppingCartDAO() {
 		importFile = new Properties() {
 			/**
 			 * 
