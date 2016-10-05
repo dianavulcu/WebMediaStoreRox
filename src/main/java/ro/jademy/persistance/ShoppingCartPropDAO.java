@@ -17,12 +17,12 @@ import ro.jademy.domain.entities.ShoppingCart;
 import ro.jademy.domain.entities.User;
 
 @Repository
-public class ShoppingCartDAO {
+public class ShoppingCartPropDAO {
 
 	private Properties importFile;
-	private static ShoppingCartDAO soleInstance = new ShoppingCartDAO();
+	private static ShoppingCartPropDAO soleInstance = new ShoppingCartPropDAO();
 
-	public ShoppingCartDAO() {
+	public ShoppingCartPropDAO() {
 		importFile = new Properties() {
 			/**
 			 * 
@@ -41,7 +41,7 @@ public class ShoppingCartDAO {
 		}
 	}
 
-	public static ShoppingCartDAO getInstance() {
+	public static ShoppingCartPropDAO getInstance() {
 		return soleInstance;
 	}
 
