@@ -9,8 +9,8 @@ public class ConnectionManager {
 	public static Connection getConnection() {
 		try {
 			Connection connection = DriverManager.getConnection(
-					"jdbc:postgresql://ec2-54-243-203-141.compute-1.amazonaws.com:5432/db097ee5t7rs7r?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory",
-					"xvseorxagpkwwn", "PTA8mq2JR2mBe1eR4IY6AhInua");
+					"jdbc:mysql://localhost:3306/media_store",
+					"root", "root");
 			return connection;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

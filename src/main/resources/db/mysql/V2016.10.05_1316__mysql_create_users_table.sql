@@ -1,6 +1,10 @@
-INSERT INTO `users` ('username', 'email','password')
-VALUES ('eduard','hariseduardandrei@gmail.com','dorel');
-INSERT INTO `users` ('username', 'email','password')
-VALUES ('roxana','roxroxemailrox@gmail.com','1234');
-INSERT INTO `users` ('username', 'email','password')
-VALUES ('mihai','mihaivasilache@gmail.com','1234');
+CREATE TABLE users (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  username varchar(200) NOT NULL,
+  first_name varchar(70) DEFAULT NULL,
+  last_name varchar(70) DEFAULT NULL,
+  email varchar(70) NOT NULL,
+  password varchar(70) DEFAULT NULL,
+  uuid varchar(50) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
