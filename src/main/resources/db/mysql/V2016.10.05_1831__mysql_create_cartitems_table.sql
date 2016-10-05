@@ -1,5 +1,7 @@
-CREATE TABLE shopping_carts (
+CREATE TABLE cart_items (
   id int(11) NOT NULL AUTO_INCREMENT,
-  user_id int(11) NOT NULL,
+  shopping_cart_id int(11) NOT NULL,
+  media_id int(11) NOT NULL,
+  quantity int(11) NOT NULL,
   PRIMARY KEY (id)
 );
