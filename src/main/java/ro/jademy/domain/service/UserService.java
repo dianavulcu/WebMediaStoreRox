@@ -16,7 +16,7 @@ import ro.jademy.persistance.UserPropDAO;
 public class UserService {
 	
 	@Autowired
-	ServiceLocator serviceLocator;
+	private ServiceLocator serviceLocator;
 
 	public User checkPassword(User user) {
 		User dbUser = getUserByUsername(user.getUsername());
@@ -31,9 +31,11 @@ public class UserService {
 	}
 
 	public User getUserByUsername(String username) {
-		UserDAO userDao = serviceLocator.getUserDao();
-		return userDao.getUserByUsername(username);
-		
+		return serviceLocator.getUserDao().getUserByUsername(username);
+	}
+	
+	void setServiceLocator(ServiceLocator serviceLocator) {
+		this.serviceLocator = serviceLocator;
 	}
 
 	public User saveUser(User user) {
