@@ -6,6 +6,8 @@ public class User {
 	private String emailAddress;
 	private String uuid;
 	private UserType userType;
+	private String first_name;
+	private String last_name;
 
 	// constructors
 	public User() {
@@ -17,13 +19,13 @@ public class User {
 		this.emailAddress = emailAddress;
 	}
 
-	public User(String username, String password, String emailAddress, UserType userType) {
+	public User(String username, String password, String emailAddress, UserType userType, String first_name, String last_name) {
 		this(username, password, emailAddress);
 		this.userType = userType;
 	}
 
-	public User(String username, String password, String emailAddress, String uuid, UserType userType) {
-		this(username, password, emailAddress, userType);
+	public User(String username, String password, String emailAddress, String uuid, UserType userType, String first_name, String last_name) {
+		this(username, password, emailAddress, userType, first_name, last_name);
 		this.uuid = uuid;
 	}
 
@@ -66,5 +68,21 @@ public class User {
 
 	public void setUserType(UserType userType) {
 		this.userType = userType;
+	}
+
+	public String getFirst_name() {
+		return first_name;
+	}
+
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+	public String getLast_name() {
+		return last_name;
+	}
+
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
 	}
 }

@@ -19,6 +19,11 @@ public class UserPropDAO implements UserDAO {
 
 	private UserPropDAO() {
 		importFile = new Properties() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public synchronized Enumeration<Object> keys() {
 				return Collections.enumeration(new TreeSet<Object>(keySet()));
 			}
@@ -47,8 +52,9 @@ public class UserPropDAO implements UserDAO {
 				String dbPassword = importFile.getProperty("user[" + i + "].password");
 				String dbEmailAddress = importFile.getProperty("user[" + i + "].emailAddress");
 				UserType dbUserType = UserType.valueOf(importFile.getProperty("user[" + i + "].customer"));
-				User dbUser = new User(dbUsername, dbPassword, dbEmailAddress, dbUserType);
-				dbUser.setUserType(dbUserType);
+				String dbFirst_Name = importFile.getProperty("user[" + i + "].first_name");
+				String dbLast_Name = importFile.getProperty("user[" + i + "].last_name");
+				User dbUser = new User(dbUsername, dbPassword, dbEmailAddress, dbUserType, dbFirst_Name, dbLast_Name);
 				return dbUser;
 			}
 		}
@@ -71,6 +77,8 @@ public class UserPropDAO implements UserDAO {
 		importFile.setProperty("user[" + index + "].password", user.getPassword());
 		importFile.setProperty("user[" + index + "].emailAddress", user.getEmailAddress());
 		importFile.setProperty("user[" + index + "].customer", user.getUserType().name());
+		importFile.setProperty("user[" + index + "].first_name", user.getFirst_name());
+		importFile.setProperty("user[" + index + "].last_name", user.getLast_name());
 		FileOutputStream fos;
 		try {
 			fos = new FileOutputStream("user.properties");
@@ -79,7 +87,6 @@ public class UserPropDAO implements UserDAO {
 		} catch (IOException e) {
 			throw new RuntimeException("Cannot save user.properties", e);
 		}
-
 	}
 
 	public void updateUser(User user) {
@@ -91,12 +98,12 @@ public class UserPropDAO implements UserDAO {
 				return;
 			}
 			if (dbUsername.equals(user.getUsername())) {
-				String s = user.getPassword();
-				System.out.println(s);
 				importFile.setProperty("user[" + i + "].password", user.getPassword());
 				importFile.setProperty("user[" + i + "].emailAddress", user.getEmailAddress());
 				importFile.setProperty("user[" + i + "].uuid", user.getUuid());
 				importFile.setProperty("user[" + i + "].customer", user.getUserType().name());
+				importFile.setProperty("user[" + i + "].first_name", user.getFirst_name());
+				importFile.setProperty("user[" + i + "].last_name", user.getLast_name());
 				FileOutputStream fos;
 				try {
 					fos = new FileOutputStream("user.properties");
@@ -107,7 +114,6 @@ public class UserPropDAO implements UserDAO {
 				}
 			}
 		}
-
 	}
 
 	public User getUserByUuid(String uuid) {
@@ -123,7 +129,9 @@ public class UserPropDAO implements UserDAO {
 				String dbPassword = importFile.getProperty("user[" + i + "].password");
 				String dbEmailAddress = importFile.getProperty("user[" + i + "].emailAddress");
 				UserType dbUserType = UserType.valueOf(importFile.getProperty("user[" + i + "].customer"));
-				User user = new User(dbUsername, dbPassword, dbEmailAddress, uuid, dbUserType);
+				String dbFirst_name = importFile.getProperty("user[" + i + "].first_name");
+				String dbLast_name = importFile.getProperty("user[" + i + "].last_name");
+				User user = new User(dbUsername, dbPassword, dbEmailAddress, dbUuid, dbUserType, dbFirst_name, dbLast_name);
 				return user;
 			}
 		}

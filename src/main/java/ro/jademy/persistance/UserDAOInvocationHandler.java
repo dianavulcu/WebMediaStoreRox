@@ -17,31 +17,18 @@ public class UserDAOInvocationHandler implements InvocationHandler {
 			argsClasses[i] = args[i].getClass();
 			i++;
 		}
-		
+
 		Method localMethod = userDBDAO.getClass().getMethod(method.getName(), argsClasses);
 		Field field = userDBDAO.getClass().getDeclaredField("connection");
 		field.setAccessible(true);
-		if(method.isAnnotationPresent(Postgres.class)) {
-			field.set(userDBDAO, getConnection());
+		if (method.isAnnotationPresent(Postgres.class)) {
+			field.set(userDBDAO, ConnectionManager.getConnection());
 		} else {
-			field.set(userDBDAO, getConnection());
+			field.set(userDBDAO, ConnectionManager.getConnection());
 		}
 		Object invoke = localMethod.invoke(userDBDAO, args);
-		((Connection)field.get(userDBDAO)).close();
+		((Connection) field.get(userDBDAO)).close();
 		field.set(userDBDAO, null);
 		return invoke;
 	}
-	
-	Connection getConnection(){
-		try {
-			Connection connection = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/media_store", 
-					"root",
-					"root");
-			return connection;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
 }

@@ -48,7 +48,7 @@ public class UserService {
 	}
 	
 	public User getUserByUuid(String uuid) {
-		return UserPropDAO.getInstance().getUserByUuid(uuid);
+		return serviceLocator.getUserDao().getUserByUuid(uuid);
 	}
 
 	public void updateUserPassword(User user, String password) {

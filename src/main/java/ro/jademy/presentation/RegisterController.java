@@ -26,10 +26,8 @@ public class RegisterController {
 	}
 
 	@RequestMapping("/registerUser")
-	public ModelAndView saveNewUser(String userName, String password, String repeatPassword, String emailAddress) {
-
-		User user = userService.getUserByUsername("eduard");
-		userService.updateUserPassword(user, "nouldorel");
+	public ModelAndView saveNewUser(String userName, String password, String repeatPassword, 
+			String first_name, String last_name, String emailAddress) {
 
 		if (userName == null || password == null || repeatPassword == null || userName.trim().isEmpty()
 				|| password.trim().isEmpty() || repeatPassword.trim().isEmpty()) {
@@ -50,10 +48,11 @@ public class RegisterController {
 			return mv;
 		}
 
-		User savedUser = userService.saveUser(new User(userName, password, emailAddress, UserType.REGULAR));
+		User savedUser = userService.saveUser(new User(userName, password, emailAddress, UserType.REGULAR, first_name, last_name));
 		mailService.sendRegistrationMail(savedUser);
 		ModelAndView mv = new ModelAndView("login");
 		mv.addObject("errorMessage", "Userul a fost creat cu succes. Verifica-ti emailul.");
+		mv.addObject("username", userName);
 		return mv;
 	}
 

@@ -53,6 +53,26 @@
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="form-group">
+											<label for="first_name"><h4>First Name:</h4></label> <input type="text"
+												name="first_name" class="form-control" id="first_name"
+												placeholder="Enter First Name">
+										</div>
+
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="form-group">
+											<label for="last_name"><h4>Last Name:</h4></label> <input type="text"
+												name="last_name" class="form-control" id="last_name"
+												placeholder="Enter Last Name">
+										</div>
+
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="form-group">
 											<label for="email"><h4>Email:</h4></label> <input type="email"
 												name="emailAddress" class="form-control" id="emailAddress"
 												placeholder="Enter Email">

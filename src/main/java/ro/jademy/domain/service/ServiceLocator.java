@@ -30,8 +30,6 @@ public class ServiceLocator {
 			UserDAO proxy = (UserDAO) Proxy.newProxyInstance(UserDAO.class.getClassLoader(),
 					new Class[] { UserDAO.class }, handler);
 			return proxy;
-
-
 		}
 		if (daoType.equals("PROP")) {
 			return UserPropDAO.getInstance();
