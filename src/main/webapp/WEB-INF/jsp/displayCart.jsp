@@ -43,9 +43,22 @@
  <div class="container">
 		<div class="jumbotron">
 			<div class="bs-example">
-<c:forEach items="${shoppingCart.cartItems}" var="cartItem" varStatus="status">
-${status.index+1}. ${cartItem.media.title} - ${cartItem.media.description}     Cantitate: ${cartItem.quantity} - Pret: ${cartItem.totalPrice} RON<br/>
-</c:forEach>
+			<div class="row">
+				<div class="col-xs-2">POZITIE</div>
+				<div class="col-xs-2">TITLU</div>
+				<div class="col-xs-2">DESCRIERE</div>
+				<div class="col-xs-2">CANTITATE(BUC.)</div>
+				<div class="col-xs-2">PRET(RON)</div>
+			</div>
+			<c:forEach items="${shoppingCart.cartItems}" var="cartItem" varStatus="status">
+			<div class="row">
+				<div class="col-xs-2">${status.index+1}</div>
+				<div class="col-xs-2">${cartItem.media.title}</div>
+				<div class="col-xs-2">${cartItem.media.description}</div>
+				<div class="col-xs-2">${cartItem.quantity}</div>
+				<div class="col-xs-2">${cartItem.totalPrice}</div>
+			</div>					
+			</c:forEach>
 <br/>
 <a href="/checkout"><button class="btn btn-primary" >0. Check out</button></a>
 </div>

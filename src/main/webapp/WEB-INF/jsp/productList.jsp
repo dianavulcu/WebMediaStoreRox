@@ -43,23 +43,30 @@
 			<div class="jumbotron">
 				<div class="bs-example">
 					<div class="row">
-						<div class="col-xs-2">Sort<a href="/productList/${productType}?sort=TITLE&order=ASC">-></a>
-						<a href="/productList/${productType}?sort=TITLE&order=DESC"><-</a></div>
-						<div class="col-xs-1">Sort<a href="/productList/${productType}?sort=DESCRIPTION&order=ASC">-></a>
-						<a href="/productList/${productType}?sort=DESCRIPTION&order=DESC"><-</a></div>
-						<div class="col-xs-1">Sort<a href="/productList/${productType}?sort=PRICE&order=ASC">-></a>
-						<a href="/productList/${productType}?sort=PRICE&order=DESC"><-</a></div>
-						<div class="col-xs-1">Sort<a href="/productList/${productType}?sort=GENRE&order=ASC">-></a>
-						<a href="/productList/${productType}?sort=GENRE&order=DESC"><-</a></div>
+						<div class="col-xs-2">(Sortare<a href="/productList/${productType}?sort=TITLE&order=ASC">-></a>
+						<a href="/productList/${productType}?sort=TITLE&order=DESC"><-)</a></div>
+						<div class="col-xs-2">(Sortare<a href="/productList/${productType}?sort=DESCRIPTION&order=ASC">-></a>
+						<a href="/productList/${productType}?sort=DESCRIPTION&order=DESC"><-)</a></div>
+						<div class="col-xs-2">(Sortare<a href="/productList/${productType}?sort=PRICE&order=ASC">-></a>
+						<a href="/productList/${productType}?sort=PRICE&order=DESC"><-)</a></div>
+						<div class="col-xs-2">(Sortare<a href="/productList/${productType}?sort=GENRE&order=ASC">-></a>
+						<a href="/productList/${productType}?sort=GENRE&order=DESC"><-)</a></div>
 						
 					</div>	
+					<div class="row">
+					<div class="col-xs-2">TITLU</div>
+					<div class="col-xs-2">DESCRIERE</div>
+					<div class="col-xs-2">PRET</div>
+					<div class="col-xs-2">GEN</div>
+					</div>
+					
 					<c:forEach items="${aList}" var="aMedia">
 						<form action="/addProductToCart" method="post">
 							<div class="row">
 								<div class="col-xs-2">${aMedia.title}</div>
-								<div class="col-xs-1">${aMedia.description}</div>
-								<div class="col-xs-1">${aMedia.price}</div>
-								<div class="col-xs-1">${aMedia.genre}</div>
+								<div class="col-xs-2">${aMedia.description}</div>
+								<div class="col-xs-2">${aMedia.price}</div>
+								<div class="col-xs-2">${aMedia.genre}</div>
 								<div class="col-xs-1">
 									<div class="form-group">
 										<input class="form-control" type="text" value="1" name="cantitate" />
@@ -75,7 +82,7 @@
 							<input type="hidden" value="${productType}" name="productType"/>
 						</form>
 					</c:forEach>
-					<h6>TOTAL: ${fn:length(shoppingCart.cartItems)} produse, cantitate: ${shoppingCart.totalItems}, Total: ${shoppingCart.totalPrice} RON</h6>
+					<h6>TOTAL: ${fn:length(shoppingCart.cartItems)} produse, cantitate: ${shoppingCart.totalItems} buc., Total: ${shoppingCart.totalPrice} RON</h6>
 					<a href="/mainMenu"><button class="btn btn-warning">Înapoi la meniul principal</button></a>
 					&nbsp&nbsp
 					<span><a href="/displayCart"><button class="btn btn-success">Afișează coșul</button></a></span>
