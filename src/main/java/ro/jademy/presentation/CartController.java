@@ -58,8 +58,8 @@ public class CartController {
 			return new ModelAndView("displayCart");
 		}
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
-		shoppingCartService.saveShoppingCart(shoppingCart, currentUser);
-		request.getSession().setAttribute("shoppingCart", new ShoppingCart());
+		ShoppingCart dbCart = shoppingCartService.saveShoppingCart(shoppingCart, currentUser);
+		request.getSession().setAttribute("shoppingCart", dbCart);
 		return new ModelAndView("redirect:/mainMenu");
 	}
 

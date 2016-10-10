@@ -6,8 +6,8 @@ public class User {
 	private String emailAddress;
 	private String uuid;
 	private UserType userType;
-	private String first_name;
-	private String last_name;
+	private String firstName;
+	private String lastName;
 
 	// constructors
 	public User() {
@@ -22,11 +22,15 @@ public class User {
 	public User(String username, String password, String emailAddress, UserType userType, String first_name, String last_name) {
 		this(username, password, emailAddress);
 		this.userType = userType;
+		this.firstName = first_name;
+		this.lastName=last_name;
 	}
 
 	public User(String username, String password, String emailAddress, String uuid, UserType userType, String first_name, String last_name) {
 		this(username, password, emailAddress, userType, first_name, last_name);
 		this.uuid = uuid;
+		this.firstName = first_name;
+		this.lastName=last_name;
 	}
 
 	// getters and setters
@@ -71,18 +75,18 @@ public class User {
 	}
 
 	public String getFirst_name() {
-		return first_name;
+		return firstName;
 	}
 
 	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+		this.firstName = first_name;
 	}
 
 	public String getLast_name() {
-		return last_name;
+		return lastName;
 	}
 
 	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+		this.lastName = last_name;
 	}
 }

@@ -6,9 +6,11 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Properties;
 import java.util.TreeSet;
 
+import ro.jademy.domain.entities.ShoppingCart;
 import ro.jademy.domain.entities.User;
 import ro.jademy.domain.entities.UserType;
 
@@ -135,6 +137,12 @@ public class UserPropDAO implements UserDAO {
 				return user;
 			}
 		}
+	}
+
+	@Override
+	public List<ShoppingCart> getShoppingCartsByUser(User currentUser) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

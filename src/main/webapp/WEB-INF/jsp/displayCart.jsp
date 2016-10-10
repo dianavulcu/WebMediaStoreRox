@@ -2,6 +2,7 @@
 	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -56,7 +57,8 @@
 				<div class="col-xs-2">${cartItem.media.title}</div>
 				<div class="col-xs-2">${cartItem.media.description}</div>
 				<div class="col-xs-2">${cartItem.quantity}</div>
-				<div class="col-xs-2">${cartItem.totalPrice}</div>
+				<div class="col-xs-2"><fmt:formatNumber value="${cartItem.totalPrice}" type="number" 
+            maxFractionDigits="2"/></div>
 			</div>					
 			</c:forEach>
 <br/>

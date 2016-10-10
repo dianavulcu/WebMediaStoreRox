@@ -53,8 +53,8 @@
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="form-group">
-											<label for="first_name"><h4>First Name:</h4></label> <input type="text"
-												name="first_name" class="form-control" id="first_name"
+											<label for="firstName"><h4>First Name:</h4></label> <input type="text"
+												name="firstName" class="form-control" id="firstName"
 												placeholder="Enter First Name">
 										</div>
 
@@ -63,8 +63,8 @@
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="form-group">
-											<label for="last_name"><h4>Last Name:</h4></label> <input type="text"
-												name="last_name" class="form-control" id="last_name"
+											<label for="lastName"><h4>Last Name:</h4></label> <input type="text"
+												name="lastName" class="form-control" id="lastName"
 												placeholder="Enter Last Name">
 										</div>
 

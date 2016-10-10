@@ -1,14 +1,13 @@
 package ro.jademy.domain.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ro.jademy.domain.entities.ShoppingCart;
 import ro.jademy.domain.entities.User;
-import ro.jademy.persistance.UserDAO;
-import ro.jademy.persistance.UserDBDAO;
-import ro.jademy.persistance.UserPropDAO;
 
 
 
@@ -59,5 +58,10 @@ public class UserService {
 	public void resetUuid(User user) {
 		user.setUuid(UUID.randomUUID().toString());	
 		updateUser(user);	
+	}
+
+	public List<ShoppingCart> getShoppingCartsByUser(User currentUser) {
+		return serviceLocator.getUserDao().getShoppingCartsByUser(currentUser);
+		
 	}
 }
