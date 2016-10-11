@@ -34,7 +34,7 @@ public class CartController {
 		ShoppingCart shoppingCart = (ShoppingCart)request.getSession().getAttribute("shoppingCart");
 		if(shoppingCart == null){
 			shoppingCart = new ShoppingCart();
-			request.getSession().setAttribute("shoppingCart", shoppingCart);
+			//request.getSession().setAttribute("shoppingCart", shoppingCart);
 		}
 		
 		shoppingCart.addToCart(media, cantitate);
