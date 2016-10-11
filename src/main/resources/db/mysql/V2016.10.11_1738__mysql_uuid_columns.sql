@@ -1,0 +1,3 @@
+ALTER TABLE users 
+ADD COLUMN remember_ME_ID VARCHAR(45) NULL AFTER uuid,
+ADD COLUMN remember_ME_Date DATETIME NULL AFTER remember_ME_ID;

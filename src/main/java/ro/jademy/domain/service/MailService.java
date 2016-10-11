@@ -10,6 +10,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
@@ -29,7 +30,8 @@ public class MailService {
 
 	@Autowired
 	private UserService userService;
-
+	
+	@Async
 	public void sendRegistrationMail(User user) {
 		try {
 			MimeMessage mail = javaMailSender.createMimeMessage();
@@ -46,7 +48,8 @@ public class MailService {
 			throw new MailNotificationException("Cannot send mail", e);
 		}
 	}
-
+	
+	@Async
 	public void sendPasswordResetMail(User user, String url) {
 		try {
 			MimeMessage mail = javaMailSender.createMimeMessage();
@@ -72,7 +75,8 @@ public class MailService {
 			throw new MailNotificationException("Cannot send email", e);
 		}
 	}
-
+	
+	@Async
 	public void sendNewPasswordMail(User user) {
 		try {
 			MimeMessage mail = javaMailSender.createMimeMessage();
@@ -92,7 +96,8 @@ public class MailService {
 			throw new MailNotificationException("Cannot send email", e);
 		}
 	}
-
+	
+	@Async
 	public void sendCheckoutMail(ShoppingCart shoppingCart, User user) {
 		try {
 			MimeMessage mail = javaMailSender.createMimeMessage();

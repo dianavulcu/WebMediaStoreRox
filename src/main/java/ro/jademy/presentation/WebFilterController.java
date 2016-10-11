@@ -1,6 +1,7 @@
 package ro.jademy.presentation;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -9,17 +10,22 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import ro.jademy.domain.entities.User;
+import ro.jademy.domain.service.UserService;
 
 @WebFilter(value = "/*", description = "Session Checker Filter")
 @Component
 
 public class WebFilterController implements Filter {
+	@Autowired
+	UserService userService;
 
 	private FilterConfig config = null;
 
@@ -43,11 +49,26 @@ public class WebFilterController implements Filter {
 				|| request.getRequestURI().endsWith("/generatePassword/*")
 				|| request.getRequestURI().endsWith("/resetPassword")
 				|| request.getRequestURI().endsWith("/resetPassword.jsp")) {
+
 		} else if (currentUser == null) {
+			Cookie[] cookies = request.getCookies();
+			if (cookies != null) {
+				for (Cookie cookie : cookies) {
+					if ("rememberMe".equals(cookie.getName())) {
+						User user = userService.getUserByRememberMeId(cookie.getValue());
+						if (user != null && user.getRememberMeDate().plusDays(14).isAfter(LocalDateTime.now())) {
+							request.getSession().setAttribute("currentUser", user);
+							chain.doFilter(req, res);
+							return;
+						}
+					}
+				}
+			}
 			response.sendRedirect(request.getContextPath() + "/login");
 		}
 
 		chain.doFilter(req, res);
+
 	}
 
 	public void destroy() {

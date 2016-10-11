@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,13 +76,15 @@ public class UserDBDAO implements UserDAO {
 				return;
 			}
 			PreparedStatement putStatement = connection.prepareStatement(
-					"UPDATE USERS SET FIRST_NAME=?, LAST_NAME=?, EMAIL=?, PASSWORD=?, UUID=? WHERE USERNAME =?");
+					"UPDATE USERS SET FIRST_NAME=?, LAST_NAME=?, EMAIL=?, PASSWORD=?, UUID=?, remember_ME_ID=?, remember_ME_Date=? WHERE USERNAME =?");
 			putStatement.setString(1, user.getFirst_name());
 			putStatement.setString(2, user.getLast_name());
 			putStatement.setString(3, user.getEmailAddress());
 			putStatement.setString(4, user.getPassword());
 			putStatement.setString(5, user.getUuid());
-			putStatement.setString(6, user.getUsername());
+			putStatement.setString(6, user.getRememberMeId());
+			putStatement.setTimestamp(7, Timestamp.valueOf(user.getRememberMeDate()));
+			putStatement.setString(8, user.getUsername());
 			putStatement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -162,6 +165,30 @@ public class UserDBDAO implements UserDAO {
 			throw new RuntimeException("could not connect to database", e);
 		}
 
+	}
+
+	@Override
+	public User getUserByRememberMeId(String value) {
+		try {
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM  USERS WHERE remember_ME_ID = ?");
+			statement.setString(1, value);
+			ResultSet result = statement.executeQuery();
+			if (!result.next()) {
+				return null;
+			}
+			User user = new User();
+			user.setUsername(result.getString("username"));
+			user.setPassword(result.getString("password"));
+			user.setEmailAddress(result.getString("email"));
+			user.setFirst_name(result.getString("first_name"));
+			user.setLast_name(result.getString("last_name"));
+			user.setUuid(result.getString("uuid"));
+			user.setRememberMeId(result.getString("remember_ME_ID"));
+			user.setRememberMeDate(result.getTimestamp("remember_ME_Date").toLocalDateTime());
+			return user;
+		} catch (SQLException e) {
+			throw new RuntimeException("Cannot connect to database", e);
+		}
 	}
 
 }

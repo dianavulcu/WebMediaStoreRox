@@ -17,4 +17,6 @@ public interface UserDAO {
 
 	List<ShoppingCart> getShoppingCartsByUser(User currentUser);
 
+	User getUserByRememberMeId(String value);
+
 }

@@ -30,14 +30,13 @@ public class ShoppingCart {
 		cartItems.add(cartItem);
 	}
 
-	public String getTotalPrice() {
+	public double getTotalPrice() {
 		double price = 0;
 		MathContext mc = new MathContext(8);
 		for (CartItem cartItem : cartItems) {
 			price += cartItem.getTotalPrice();
 		}
-		BigDecimal bgdPrice = new BigDecimal(price, mc);
-		return String.format(Locale.ENGLISH,"%,.2f", bgdPrice.setScale(2, BigDecimal.ROUND_HALF_UP));
+		return price;
 	}
 
 	public void addToCart(Media media, int quantity) {

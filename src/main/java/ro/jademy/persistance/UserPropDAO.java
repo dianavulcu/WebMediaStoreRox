@@ -145,4 +145,10 @@ public class UserPropDAO implements UserDAO {
 		return null;
 	}
 
+	@Override
+	public User getUserByRememberMeId(String value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

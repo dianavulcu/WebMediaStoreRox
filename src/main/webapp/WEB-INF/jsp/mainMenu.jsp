@@ -63,6 +63,8 @@
 
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/logout">Log out</a>
+				</li>
 				<li> <span
 						class="glyphicon glyphicon-user"></span> Salut
 						${currentUser.username}

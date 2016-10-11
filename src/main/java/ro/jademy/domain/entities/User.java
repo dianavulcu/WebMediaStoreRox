@@ -1,5 +1,7 @@
 package ro.jademy.domain.entities;
 
+import java.time.LocalDateTime;
+
 public class User {
 	private String username;
 	private String password;
@@ -8,6 +10,25 @@ public class User {
 	private UserType userType;
 	private String firstName;
 	private String lastName;
+	private String rememberMeId;
+	private LocalDateTime rememberMeDate;
+
+	public void setRememberMeDate(LocalDateTime rememberMeDate) {
+		this.rememberMeDate = rememberMeDate;
+	}
+
+	public LocalDateTime getRememberMeDate() {
+		return rememberMeDate;
+	}
+
+	public String getRememberMeId() {
+		return rememberMeId;
+	}
+
+	public void setRememberMeId(String rememberMeId) {
+		rememberMeDate = LocalDateTime.now();
+		this.rememberMeId = rememberMeId;
+	}
 
 	// constructors
 	public User() {
