@@ -13,7 +13,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
-<title>Vizualizare coş</title>
+<title>Vizualizare coşuri</title>
 </head>
 <body>
 	<div class="bs-example">
@@ -30,7 +30,7 @@
 		<!-- Collection of nav links and other content for toggling -->
 		<div id="navbarCollapse" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Vizualizare coş</a></li>
+				<li class="active"><a href="#">Vizualizare coşuri</a></li>
 
 
 			</ul>
@@ -55,7 +55,7 @@
 				<c:forEach items="${shoppingCarts}" var="shoppingCart"
 					varStatus="statusCart">
 					<div class="row">
-						<div class="col-xs-12">Shoppingcart numarul
+						<div class="col-xs-12"> Coş de cumparaturi numarul:
 							${statusCart.index+1}</div>
 					</div>
 					<c:forEach items="${shoppingCart.cartItems}" var="cartItem"
@@ -67,14 +67,14 @@
 							<div class="col-xs-2">${cartItem.quantity}</div>
 							<div class="col-xs-2">
 								<fmt:formatNumber value="${cartItem.totalPrice}" type="number"
-									maxFractionDigits="2" />
+									minFractionDigits="2" maxFractionDigits="2" />
 							</div>
 						</div>
 					</c:forEach>
+					<h6>TOTAL:${shoppingCart.totalPrice} RON</h6>
 				</c:forEach>
-
-				<br /> <a href="/checkout"><button class="btn btn-primary">0.
-						Check out</button></a>
+				<br />
+			<a href="/mainMenu"><button class="btn btn-primary">Înapoi la meniul principal</button></a>
 			</div>
 </body>
 </html>
