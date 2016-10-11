@@ -26,12 +26,16 @@ public class MyAccountController {
 
 	@RequestMapping("/myAccount")
 	public ModelAndView myAccount(HttpServletRequest request) {
-
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
+		if (currentUser == null) {
+			ModelAndView mv = new ModelAndView("mainMenu");
+			return mv;			
+		}
 		List<ShoppingCart> shoppingCarts;
 		shoppingCarts = userService.getShoppingCartsByUser(currentUser);
 
-		ModelAndView mv = new ModelAndView("myAccount", "shoppingCarts", shoppingCarts);
+		ModelAndView mv = new ModelAndView("myAccount");
+		mv.addObject("shoppingCarts", shoppingCarts);
 		return mv;
 	}
 
