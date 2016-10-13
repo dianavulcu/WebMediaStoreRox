@@ -44,7 +44,6 @@ public class UserDBDAO implements UserDAO {
 		} catch (SQLException e) {
 			throw new RuntimeException("Cannot connect to database", e);
 		}
-
 	}
 
 	public User getUserByUsername(String username) {
@@ -55,17 +54,57 @@ public class UserDBDAO implements UserDAO {
 			if (!result.next()) {
 				return null;
 			}
-			User user = new User();
-			user.setPassword(result.getString("password"));
-			user.setEmailAddress(result.getString("email"));
-			user.setUuid(result.getString("uuid"));
-			user.setUsername(result.getString("username"));
-			user.setFirst_name(result.getString("first_name"));
-			user.setLast_name(result.getString("last_name"));
+			User user = getUser(result);
 			return user;
 		} catch (SQLException e) {
 			throw new RuntimeException("Cannot connect to database", e);
 		}
+	}
+
+	public User getUserByUuid(String uuid) {
+		try {
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM  USERS WHERE uuid = ?");
+			statement.setString(1, uuid);
+			ResultSet result = statement.executeQuery();
+			if (!result.next()) {
+				return null;
+			}
+			User user = getUser(result);
+			return user;
+		} catch (SQLException e) {
+			throw new RuntimeException("Cannot connect to database", e);
+		}
+	}
+
+	@Override
+	public User getUserByRememberMeId(String value) {
+		try {
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM  USERS WHERE remember_ME_ID = ?");
+			statement.setString(1, value);
+			ResultSet result = statement.executeQuery();
+			if (!result.next()) {
+				return null;
+			}
+			User user = getUser(result);
+			return user;
+		} catch (SQLException e) {
+			throw new RuntimeException("Cannot connect to database", e);
+		}
+	}
+
+	private User getUser(ResultSet result) throws SQLException {
+		User user = new User();
+		user.setUsername(result.getString("username"));
+		user.setPassword(result.getString("password"));
+		user.setEmailAddress(result.getString("email"));
+		user.setUuid(result.getString("uuid"));
+		user.setFirst_name(result.getString("first_name"));
+		user.setLast_name(result.getString("last_name"));
+		user.setUserType(UserType.valueOf(
+				(result.getString("user_Type") == null ? UserType.NEW_CLIENT.name() : result.getString("user_Type"))));
+		user.setRememberMeId(result.getString("remember_ME_ID"));
+		user.setRememberMeDate(result.getTimestamp("remember_ME_Date").toLocalDateTime());
+		return user;
 	}
 
 	public void updateUser(User user) {
@@ -88,28 +127,6 @@ public class UserDBDAO implements UserDAO {
 			putStatement.setString(8, user.getUserType().name());
 			putStatement.setString(9, user.getUsername());
 			putStatement.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new RuntimeException("Cannot connect to database", e);
-		}
-	}
-
-	public User getUserByUuid(String uuid) {
-		try {
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM  USERS WHERE uuid = ?");
-			statement.setString(1, uuid);
-			ResultSet result = statement.executeQuery();
-			if (!result.next()) {
-				return null;
-			}
-			User user = new User();
-			user.setUsername(result.getString("username"));
-			user.setPassword(result.getString("password"));
-			user.setEmailAddress(result.getString("email"));
-			user.setFirst_name(result.getString("first_name"));
-			user.setLast_name(result.getString("last_name"));
-			user.setUuid(uuid);
-			return user;
 		} catch (SQLException e) {
 			throw new RuntimeException("Cannot connect to database", e);
 		}
@@ -164,30 +181,6 @@ public class UserDBDAO implements UserDAO {
 			return shoppingCarts;
 		} catch (SQLException e) {
 			throw new RuntimeException("could not connect to database", e);
-		}
-	}
-
-	@Override
-	public User getUserByRememberMeId(String value) {
-		try {
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM  USERS WHERE remember_ME_ID = ?");
-			statement.setString(1, value);
-			ResultSet result = statement.executeQuery();
-			if (!result.next()) {
-				return null;
-			}
-			User user = new User();
-			user.setUsername(result.getString("username"));
-			user.setPassword(result.getString("password"));
-			user.setEmailAddress(result.getString("email"));
-			user.setFirst_name(result.getString("first_name"));
-			user.setLast_name(result.getString("last_name"));
-			user.setUuid(result.getString("uuid"));
-			user.setRememberMeId(result.getString("remember_ME_ID"));
-			user.setRememberMeDate(result.getTimestamp("remember_ME_Date").toLocalDateTime());
-			return user;
-		} catch (SQLException e) {
-			throw new RuntimeException("Cannot connect to database", e);
 		}
 	}
 
