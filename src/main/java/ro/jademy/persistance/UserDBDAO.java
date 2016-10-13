@@ -16,6 +16,7 @@ import ro.jademy.domain.entities.MediaGenre;
 import ro.jademy.domain.entities.ProductType;
 import ro.jademy.domain.entities.ShoppingCart;
 import ro.jademy.domain.entities.User;
+import ro.jademy.domain.entities.UserType;
 
 public class UserDBDAO implements UserDAO {
 
@@ -76,7 +77,7 @@ public class UserDBDAO implements UserDAO {
 				return;
 			}
 			PreparedStatement putStatement = connection.prepareStatement(
-					"UPDATE USERS SET FIRST_NAME=?, LAST_NAME=?, EMAIL=?, PASSWORD=?, UUID=?, remember_ME_ID=?, remember_ME_Date=? WHERE USERNAME =?");
+					"UPDATE USERS SET FIRST_NAME=?, LAST_NAME=?, EMAIL=?, PASSWORD=?, UUID=?, remember_ME_ID=?, remember_ME_Date=?, user_Type=? WHERE USERNAME =?");
 			putStatement.setString(1, user.getFirst_name());
 			putStatement.setString(2, user.getLast_name());
 			putStatement.setString(3, user.getEmailAddress());
@@ -84,7 +85,8 @@ public class UserDBDAO implements UserDAO {
 			putStatement.setString(5, user.getUuid());
 			putStatement.setString(6, user.getRememberMeId());
 			putStatement.setTimestamp(7, Timestamp.valueOf(user.getRememberMeDate()));
-			putStatement.setString(8, user.getUsername());
+			putStatement.setString(8, user.getUserType().name());
+			putStatement.setString(9, user.getUsername());
 			putStatement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -161,10 +163,8 @@ public class UserDBDAO implements UserDAO {
 			}
 			return shoppingCarts;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			throw new RuntimeException("could not connect to database", e);
 		}
-
 	}
 
 	@Override

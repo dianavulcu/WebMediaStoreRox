@@ -98,7 +98,7 @@ public class MailService {
 	}
 	
 	@Async
-	public void sendCheckoutMail(ShoppingCart shoppingCart, User user) {
+	public void sendCheckoutMail(ShoppingCart shoppingCart, User user, double discountForUser) {
 		try {
 			MimeMessage mail = javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(mail, true);
@@ -109,6 +109,8 @@ public class MailService {
 			model.put("user", user);
 			model.put("shoppingCartitems", shoppingCart.getCartItems());
 			model.put("total", shoppingCart.getTotalPrice());
+			model.put("discount", discountForUser);
+			model.put("totalCuDiscount", shoppingCart.getTotalPrice()-(shoppingCart.getTotalPrice()*discountForUser/100));
 
 			helper.setText(
 					VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "checkout.vm", CHARSET_UTF8, model),

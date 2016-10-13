@@ -19,6 +19,7 @@ import ro.jademy.domain.entities.MediaGenre;
 import ro.jademy.domain.entities.ProductType;
 import ro.jademy.domain.entities.ShoppingCart;
 import ro.jademy.domain.entities.User;
+import ro.jademy.domain.entities.UserType;
 
 @Repository
 public class ShoppingCartDBDAO {

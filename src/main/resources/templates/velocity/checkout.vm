@@ -33,9 +33,11 @@
       #end   
     </tbody>
   </table>
-  <br/> 
-   <p style="float:left; color:blue">Total valoare: ${total} RON</p>
-   <br/>
+  <br/>
+  <h3>Total valoare : ${total} RON</h3>
+  <h3>Total discount: ${discount} %</h3> 
+  <h3>Total de plata: ${totalCuDiscount} RON</h3>
+  <br/>
   <h3>Spor la cumpărături !</h3>
 </div>
 

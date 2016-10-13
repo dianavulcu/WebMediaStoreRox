@@ -34,9 +34,8 @@
 
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"> <span class="glyphicon glyphicon-user"></span>
-						Salut ${currentUser.username}
-				</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
+						Salut ${currentUser.username} </a></li>
 			</ul>
 		</div>
 		</nav>

@@ -59,16 +59,13 @@
 		<div id="navbarCollapse" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Listă produse</a></li>
-
-
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/logout">Log out</a>
-				</li>
-				<li> <span
+				<li><a href="/logout">Log out</a></li>
+				<li><a href="#"><span
 						class="glyphicon glyphicon-user"></span> Salut
 						${currentUser.username}
-				</li>
+				</a></li>
 			</ul>
 		</div>
 		</nav>
@@ -101,7 +98,7 @@
 				</div>
 			</div>
 			<br />
-			<a href="/myAccount"><button class="btn btn-primary">Afişare coş/uri cumpărături</button></a>
+			<a href="/myAccount"><button class="btn btn-primary">Afişare istoric cumpărături</button></a>
 		</div>
 	</div>
 </body>

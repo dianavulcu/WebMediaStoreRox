@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import ro.jademy.domain.entities.ShoppingCart;
 import ro.jademy.domain.entities.User;
 import ro.jademy.domain.entities.UserType;
+import ro.jademy.persistance.UserDBDAO;
 
 @Service
 public class UserService {
@@ -46,6 +47,9 @@ public class UserService {
 	}
 
 	public void updateUser(User user) {
+		if (user.getUserType() == null) {
+			user.setUserType(UserType.NEW_CLIENT);
+		}
 		serviceLocator.getUserDao().updateUser(user);
 	}
 
@@ -63,44 +67,61 @@ public class UserService {
 		updateUser(user);
 	}
 
-	public List<ShoppingCart> getShoppingCartsByUser(User currentUser) {
-		// logica
-		return serviceLocator.getUserDao().getShoppingCartsByUser(currentUser);
+	public void updateUserUserType(User user, UserType userType) {
+		user.setUserType(userType);
+		updateUser(user);
+	}
 
+	public List<ShoppingCart> getShoppingCartsByUser(User currentUser) {
+		return serviceLocator.getUserDao().getShoppingCartsByUser(currentUser);
 	}
 
 	public User getUserByRememberMeId(String value) {
 		return serviceLocator.getUserDao().getUserByRememberMeId(value);
-
 	}
 
 	public int getLoyaltyPointsForUser(User user) {
 		List<ShoppingCart> shoppingCarts = serviceLocator.getUserDao().getShoppingCartsByUser(user);
 		int lp = 0;
-		UserType userType = UserType.NEW_RENTAL_CLIENT;
 		for (ShoppingCart shoppingCart : shoppingCarts) {
 			double shoppingCartPrice = shoppingCart.getTotalPrice();
-			if (userType == UserType.NEW_RENTAL_CLIENT) {
-				shoppingCartPrice *= 0.95;
-				userType = UserType.REGULAR;
-			}
-			if (userType == UserType.GOLD) {
-				shoppingCartPrice *= 0.99;
-			}
-			if (userType == UserType.PLATINUM) {
-				shoppingCartPrice *= 0.97;
-			}
 			if (shoppingCartPrice > 30) {
 				lp += 2;
 			} else if (shoppingCartPrice > 10) {
 				lp += 1;
 			}
-			if (lp > 100) {
-				userType = UserType.PLATINUM;
-			} else if (lp > 10) {
-				userType = UserType.GOLD;
-			}	
 		}
 		return lp;
 	}
+
+	public UserType getUserTypeForUser(int lp) {
+		UserType userType = UserType.NEW_CLIENT;
+		if (lp > 100) {
+			userType = UserType.PLATINUM;
+		} else if (lp > 10) {
+			userType = UserType.GOLD;
+		} else if (lp > 0) {
+			userType = UserType.REGULAR;
+		}
+		return userType;
+	}
+
+	public double getDiscountForUser(User user) {
+		int lp = getLoyaltyPointsForUser(user);
+		UserType userType = getUserTypeForUser(lp);
+		double shoppingCartDiscount = 0;
+		if (userType == UserType.NEW_CLIENT) {
+			shoppingCartDiscount = 5.00;
+			userType = UserType.REGULAR;
+			updateUserUserType(user, userType);
+		}
+		if (userType == UserType.GOLD) {
+			shoppingCartDiscount = 1.00;
+		}
+		if (userType == UserType.PLATINUM) {
+			shoppingCartDiscount = 3.00;
+		}
+		return shoppingCartDiscount;
+	}
+
 }

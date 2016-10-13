@@ -65,6 +65,13 @@
 						</div>
 					</div>
 				</c:forEach>
+				<h6>
+					TOTAL:
+					<fmt:formatNumber value="${shoppingCart.totalPrice}" type="number"
+						minFractionDigits="2" maxFractionDigits="2" />
+					RON
+				</h6>
+
 				<br /> <a href="/checkout"><button class="btn btn-primary">0.
 						Check out</button></a>
 			</div>

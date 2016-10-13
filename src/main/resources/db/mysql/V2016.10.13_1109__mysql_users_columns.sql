@@ -1,0 +1,2 @@
+ALTER TABLE users 
+ADD COLUMN user_Type VARCHAR(45) NULL AFTER remember_ME_Date
