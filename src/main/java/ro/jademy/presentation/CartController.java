@@ -15,50 +15,51 @@ import ro.jademy.domain.service.ShoppingCartService;
 
 @Controller
 public class CartController {
-	
+
 	@Autowired
-	ShoppingCartService shoppingCartService;  
-	
+	ShoppingCartService shoppingCartService;
+
 	@Autowired
-	MediaService mediaService;   
-	
+	MediaService mediaService;
+
 	@RequestMapping("/addProductToCart")
 	public ModelAndView addProductToCart(String productCode, int cantitate, ProductType productType,
 			HttpServletRequest request) {
 		if (cantitate == 0) {
 			ModelAndView mv = new ModelAndView("redirect:productList/" + productType.toString());
 			return mv;
-		}	
-		
+		}
+
 		Media media = mediaService.getProductByProductTypeAndCode(productType, productCode);
-		ShoppingCart shoppingCart = (ShoppingCart)request.getSession().getAttribute("shoppingCart");
-		if(shoppingCart == null){
+		ShoppingCart shoppingCart = (ShoppingCart) request.getSession().getAttribute("shoppingCart");
+		if (shoppingCart == null) {
 			shoppingCart = new ShoppingCart();
 			request.getSession().setAttribute("shoppingCart", shoppingCart);
 		}
-		
+
 		shoppingCart.addToCart(media, cantitate);
 		ModelAndView mv = new ModelAndView("redirect:productList/" + productType.toString());
 		return mv;
 
 	}
-	
+
 	@RequestMapping("/displayCart")
-	public ModelAndView displayCart(){
+	public ModelAndView displayCart() {
 		return new ModelAndView("displayCart");
 	}
-	
+
 	@RequestMapping("/checkout")
-	public ModelAndView checkout(HttpServletRequest request){
+	public ModelAndView checkout(HttpServletRequest request) {
 		ShoppingCart shoppingCart = (ShoppingCart) request.getSession().getAttribute("shoppingCart");
-		if(shoppingCart == null){
+		if (shoppingCart == null) {
 			return new ModelAndView("displayCart");
 		}
-		if(shoppingCart.getCartItems().size()==0){
+		if (shoppingCart.getCartItems().size() == 0) {
 			return new ModelAndView("displayCart");
 		}
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
-		ShoppingCart dbCart = shoppingCartService.saveShoppingCart(shoppingCart, currentUser);
+		shoppingCartService.saveShoppingCart(shoppingCart, currentUser);
+		ShoppingCart dbCart = new ShoppingCart();
 		request.getSession().setAttribute("shoppingCart", dbCart);
 		return new ModelAndView("redirect:/mainMenu");
 	}

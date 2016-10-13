@@ -16,9 +16,8 @@ public class ShoppingCartService {
 	@Autowired
 	ShoppingCartDBDAO shoppingCartDBDAO;
 	
-	public ShoppingCart saveShoppingCart(ShoppingCart shoppingCart, User user){
+	public void saveShoppingCart(ShoppingCart shoppingCart, User user){
+		shoppingCartDBDAO.createCart(shoppingCart, user);
 		mailService.sendCheckoutMail(shoppingCart, user);
-		long savedCartId = shoppingCartDBDAO.createCart(shoppingCart, user);
-		return shoppingCartDBDAO.getShoppingCart(savedCartId);
 	}
 }

@@ -103,7 +103,7 @@ public class MailService {
 			MimeMessage mail = javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(mail, true);
 			helper.setTo(user.getEmailAddress());
-			helper.setSubject(user.getUsername() + ", here is you shopping cart, total = " + shoppingCart.getTotalPrice());
+			helper.setSubject(user.getUsername() + ", here is your shopping cart, total = " + shoppingCart.getTotalPrice());
 
 			Map model = new HashMap<>();
 			model.put("user", user);

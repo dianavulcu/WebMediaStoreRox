@@ -16,11 +16,11 @@ import ro.jademy.domain.service.UserService;
 
 @Controller
 public class LoginController {
-	private static final int TWO_WEEKS_IN_SECONDS = 2*7*24*60*60;
-	
+	private static final int TWO_WEEKS_IN_SECONDS = 2 * 7 * 24 * 60 * 60;
+
 	@Autowired
 	UserService userService;
-	
+
 	@RequestMapping("/")
 	public String home() {
 		return "login";
@@ -28,23 +28,21 @@ public class LoginController {
 
 	@RequestMapping("/login")
 	public ModelAndView login(User user, Boolean rememberMe, HttpServletRequest request, HttpServletResponse response) {
-		
+
 		if (user.getUsername() != null && !user.getUsername().trim().isEmpty()) {
 			User aUser = userService.checkPassword(user);
 			if (aUser != null) {
 				request.getSession().setAttribute("currentUser", aUser);
 				String uuidCookie = UUID.randomUUID().toString();
-				if(rememberMe != null && rememberMe){
+				if (rememberMe != null && rememberMe) {
 					Cookie cookie = new Cookie("rememberMe", uuidCookie);
 					cookie.setMaxAge(TWO_WEEKS_IN_SECONDS);
 					aUser.setRememberMeId(uuidCookie);
 					userService.updateUser(aUser);
 					response.addCookie(cookie);
-					
-					
 				}
 				return new ModelAndView("redirect:mainMenu");
-			}	
+			}
 			return new ModelAndView("login", "errorMessage", "Autentificare gresita!");
 		}
 		return new ModelAndView("login", "errorMessage", "");

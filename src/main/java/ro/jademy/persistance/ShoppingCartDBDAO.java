@@ -23,14 +23,14 @@ import ro.jademy.domain.entities.User;
 @Repository
 public class ShoppingCartDBDAO {
 
-	Connection connection = getConnection();
+	Connection connection = ConnectionManager.getConnection();
 	private static ShoppingCartDBDAO soleInstance = new ShoppingCartDBDAO();
 
 	public static ShoppingCartDBDAO getInstance() {
 		return soleInstance;
 	}
 
-	public long createCart(ShoppingCart shoppingCart, User user) {
+	public void createCart(ShoppingCart shoppingCart, User user) {
 		try {
 			PreparedStatement statement = connection.prepareStatement("SELECT id FROM USERS WHERE username = ?");
 			statement.setString(1, user.getUsername());
@@ -38,15 +38,15 @@ public class ShoppingCartDBDAO {
 			rs.next();
 			Integer userId = rs.getInt(1);
 
-			statement = connection
-					.prepareStatement("INSERT INTO shopping_carts (user_id, shopping_cart_date) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
+			statement = connection.prepareStatement(
+					"INSERT INTO shopping_carts (user_id, shopping_cart_date) VALUES (?, ?)",
+					Statement.RETURN_GENERATED_KEYS);
 			statement.setInt(1, userId);
 			Date x = new Date(System.currentTimeMillis());
 			statement.setDate(2, x);
 			statement.executeUpdate();
 			ResultSet keysRS = statement.getGeneratedKeys();
 			keysRS.next();
-			long generatedKey = keysRS.getInt(1);
 
 			statement = connection.prepareStatement("SELECT id FROM shopping_carts ORDER BY id DESC");
 			rs = statement.executeQuery();
@@ -64,52 +64,41 @@ public class ShoppingCartDBDAO {
 				rs.next();
 				int mediaId = rs.getInt(1);
 				statement.setInt(2, mediaId);
-	
-				statement.setInt(3, cartItem.getQuantity());
-				statement.executeUpdate();	
-			}
-			return generatedKey;
 
+				statement.setInt(3, cartItem.getQuantity());
+				statement.executeUpdate();
+			}
 		} catch (SQLException e) {
 			throw new RuntimeException("Cannot connect to database", e);
 		}
-
 	}
-public ShoppingCart getShoppingCart(long savedCartId) {
+
+	public ShoppingCart getShoppingCart(long savedCartId) {
 		try {
-			PreparedStatement statement = connection.prepareStatement(
-					"select * from shopping_carts "
+			PreparedStatement statement = connection.prepareStatement("select * from shopping_carts "
 					+ "left outer join cart_items on shopping_carts.id = cart_items.shopping_cart_id "
-					+ "inner join media on cart_items.media_id = media.id "
-					+ "where shopping_carts.id = ?"
-					);
+					+ "inner join media on cart_items.media_id = media.id " + "where shopping_carts.id = ?");
 			statement.setLong(1, savedCartId);
 			ResultSet rs = statement.executeQuery();
 			ShoppingCart dbShoppingCart = new ShoppingCart();
-			
-			while (rs.next()){
+
+			while (rs.next()) {
 				Media dbMedia = null;
 				ProductType dbProductType = ProductType.valueOf(rs.getString("media.product_type"));
 				switch (dbProductType) {
 				case CD:
-					dbMedia = new CD(rs.getString("media.title"),
-							rs.getDouble("media.price"), 
-							rs.getString("media.code"), 
-							MediaGenre.valueOf(rs.getString("media.genre")), 
+					dbMedia = new CD(rs.getString("media.title"), rs.getDouble("media.price"),
+							rs.getString("media.code"), MediaGenre.valueOf(rs.getString("media.genre")),
 							rs.getString("media.artist"));
 					break;
 				case DVD:
-					dbMedia = new DVD(rs.getString("media.title"),
-							rs.getDouble("media.price"), 
-							rs.getString("media.code"), 
-							MediaGenre.valueOf(rs.getString("media.genre")), 
+					dbMedia = new DVD(rs.getString("media.title"), rs.getDouble("media.price"),
+							rs.getString("media.code"), MediaGenre.valueOf(rs.getString("media.genre")),
 							rs.getString("media.directors"), rs.getString("media.production_label"));
 					break;
 				case EBOOK:
-					dbMedia = new EBOOK(rs.getString("media.title"),
-							rs.getDouble("media.price"), 
-							rs.getString("media.code"), 
-							MediaGenre.valueOf(rs.getString("media.genre")), 
+					dbMedia = new EBOOK(rs.getString("media.title"), rs.getDouble("media.price"),
+							rs.getString("media.code"), MediaGenre.valueOf(rs.getString("media.genre")),
 							rs.getString("media.author"));
 					break;
 				default:
@@ -120,49 +109,8 @@ public ShoppingCart getShoppingCart(long savedCartId) {
 			}
 			return dbShoppingCart;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			throw new RuntimeException("could not connect to database", e);
 		}
 	}
-	
-	
-	
-	// int cartIndex = getNextCartIndex();
-	// SimpleDateFormat format = new SimpleDateFormat("dd-MM-yy");
-	// importFile.setProperty("cart[" + cartIndex + "].username",
-	// user.getUsername());
-	// importFile.setProperty("cart[" + cartIndex + "].date", format.format(new
-	// Date()));
-	// int cartItemIndex = 1;
-	// for (CartItem cartItem : shoppingCart.getCartItems()) {
-	// importFile.setProperty("cart[" + cartIndex + "].cartItem[" +
-	// cartItemIndex + "].productCode",
-	// cartItem.getMedia().getCode());
-	// importFile.setProperty("cart[" + cartIndex + "].cartItem[" +
-	// cartItemIndex + "].quantity",
-	// String.valueOf(cartItem.getQuantity()));
-	// cartItemIndex++;
-	// }
-	// FileOutputStream fos;
-	// try {
-	// fos = new FileOutputStream("shopping-carts.properties");
-	// importFile.store(fos, new Date().toString());
-	// fos.close();
-	// } catch (IOException e) {
-	// throw new RuntimeException("Cannot save shopping-carts.properties", e);
-	// }
-	// }
 
-	Connection getConnection() {
-		try {
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/media_store", "root",
-					"root");
-			return connection;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-
-	}
-
-	
 }

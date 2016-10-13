@@ -29,12 +29,12 @@
       <h5><td>$velocityCount</td>
       <td>${cartItem.media.title}</td><td></td>
       <td>${cartItem.quantity} bucati</td><td></td>
-      <td>${cartItem.media.price}</td><h5></tr>
+      <td>${cartItem.media.price} RON</td><h5></tr>
       #end   
     </tbody>
   </table>
   <br/> 
-   <p style="float:left; color:blue">Total preţ: ${total}</p>
+   <p style="float:left; color:blue">Total valoare: ${total} RON</p>
    <br/>
   <h3>Spor la cumpărături !</h3>
 </div>

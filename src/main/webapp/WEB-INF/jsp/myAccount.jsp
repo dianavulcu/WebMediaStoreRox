@@ -55,7 +55,7 @@
 				<c:forEach items="${shoppingCarts}" var="shoppingCart"
 					varStatus="statusCart">
 					<div class="row">
-						<div class="col-xs-12"> Coş de cumparaturi numarul:
+						<div class="col-xs-12">Coş de cumparaturi numarul:
 							${statusCart.index+1}</div>
 					</div>
 					<c:forEach items="${shoppingCart.cartItems}" var="cartItem"
@@ -71,10 +71,17 @@
 							</div>
 						</div>
 					</c:forEach>
-					<h6>TOTAL:${shoppingCart.totalPrice} RON</h6>
+					<h6>
+						TOTAL:
+						<fmt:formatNumber value="${shoppingCart.totalPrice}" type="number"
+							minFractionDigits="2" maxFractionDigits="2" />
+						RON
+					</h6>
 				</c:forEach>
-				<br />
-			<a href="/mainMenu"><button class="btn btn-primary">Înapoi la meniul principal</button></a>
+				<br /> <a href="/mainMenu"><button class="btn btn-primary">Înapoi
+						la meniul principal</button></a>
 			</div>
+		</div>
+	</div>
 </body>
 </html>
