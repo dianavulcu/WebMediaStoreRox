@@ -1,11 +1,14 @@
 package ro.jademy.domain.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static ro.jademy.domain.entities.PriceCategory.*;
+import static ro.jademy.domain.entities.AgeCategory.*;
 import ro.jademy.domain.entities.ShoppingCart;
 import ro.jademy.domain.entities.User;
 import ro.jademy.domain.entities.UserType;
@@ -86,10 +89,11 @@ public class UserService {
 		for (ShoppingCart shoppingCart : shoppingCarts) {
 			double shoppingCartPrice = shoppingCart.getTotalPrice();
 			if (shoppingCartPrice > 30) {
-				lp += 2;
+				lp += 3;
 			} else if (shoppingCartPrice > 10) {
-				lp += 1;
-			}
+				lp += 2;
+			} 
+			lp += shoppingCart.getLoyaltyPointsForMediaCategories();		
 		}
 		return lp;
 	}
@@ -106,20 +110,13 @@ public class UserService {
 		return userType;
 	}
 
-	public double getDiscountForUser(User user) {
+	public BigDecimal getDiscountForUser(User user) {
 		int lp = getLoyaltyPointsForUser(user);
 		UserType userType = getUserTypeForUser(lp);
-		double shoppingCartDiscount = 0;
+		BigDecimal shoppingCartDiscount = userType.getDiscount();
 		if (userType == UserType.NEW_CLIENT) {
-			shoppingCartDiscount = 5.00;
 			userType = UserType.REGULAR;
 			updateUserUserType(user, userType);
-		}
-		if (userType == UserType.GOLD) {
-			shoppingCartDiscount = 1.00;
-		}
-		if (userType == UserType.PLATINUM) {
-			shoppingCartDiscount = 3.00;
 		}
 		return shoppingCartDiscount;
 	}

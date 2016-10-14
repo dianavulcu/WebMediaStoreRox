@@ -5,6 +5,8 @@ public abstract class Media {
 	private double price;
 	private String code;
 	private MediaGenre genre;
+	private PriceCategory priceCategory;
+	private AgeCategory ageCategory;
 
 	public Media(){}
 	public Media(String title, double price, String code, MediaGenre genre) {
@@ -55,6 +57,18 @@ public abstract class Media {
 		} else if (!code.equals(other.code))
 			return false;
 		return true;
+	}
+	public PriceCategory getPriceCategory() {
+		return priceCategory;
+	}
+	public void setPriceCategory(PriceCategory priceCategory) {
+		this.priceCategory = priceCategory;
+	}
+	public AgeCategory getAgeCategory() {
+		return ageCategory;
+	}
+	public void setAgeCategory(AgeCategory ageCategory) {
+		this.ageCategory = ageCategory;
 	}
 	
 

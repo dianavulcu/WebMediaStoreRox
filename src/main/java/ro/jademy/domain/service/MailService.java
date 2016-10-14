@@ -1,5 +1,7 @@
 package ro.jademy.domain.service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -98,7 +100,7 @@ public class MailService {
 	}
 	
 	@Async
-	public void sendCheckoutMail(ShoppingCart shoppingCart, User user, double discountForUser) {
+	public void sendCheckoutMail(ShoppingCart shoppingCart, User user, BigDecimal discountForUser) {
 		try {
 			MimeMessage mail = javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(mail, true);
@@ -110,7 +112,7 @@ public class MailService {
 			model.put("shoppingCartitems", shoppingCart.getCartItems());
 			model.put("total", shoppingCart.getTotalPrice());
 			model.put("discount", discountForUser);
-			model.put("totalCuDiscount", shoppingCart.getTotalPrice()-(shoppingCart.getTotalPrice()*discountForUser/100));
+			model.put("totalCuDiscount", shoppingCart.getTotalPrice()-(shoppingCart.getTotalPrice()*(discountForUser.divide(new BigDecimal(100),2,RoundingMode.HALF_UP).doubleValue())));
 
 			helper.setText(
 					VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "checkout.vm", CHARSET_UTF8, model),

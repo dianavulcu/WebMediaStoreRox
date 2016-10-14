@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,7 +104,7 @@ public class UserDBDAO implements UserDAO {
 		user.setUserType(UserType.valueOf(
 				(result.getString("user_Type") == null ? UserType.NEW_CLIENT.name() : result.getString("user_Type"))));
 		user.setRememberMeId(result.getString("remember_ME_ID"));
-		user.setRememberMeDate(result.getTimestamp("remember_ME_Date").toLocalDateTime());
+		user.setRememberMeDate((result.getTimestamp("remember_ME_Date")==null? LocalDateTime.MIN :result.getTimestamp("remember_ME_Date").toLocalDateTime()));
 		return user;
 	}
 

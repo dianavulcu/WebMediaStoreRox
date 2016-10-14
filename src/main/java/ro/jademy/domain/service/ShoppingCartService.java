@@ -1,5 +1,7 @@
 package ro.jademy.domain.service;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,7 @@ public class ShoppingCartService {
 	UserService userService;
 
 	public void saveShoppingCart(ShoppingCart shoppingCart, User user) {
-		double discountForUser = userService.getDiscountForUser(user);
+		BigDecimal discountForUser = userService.getDiscountForUser(user);
 		shoppingCartDBDAO.createCart(shoppingCart, user);
 		mailService.sendCheckoutMail(shoppingCart, user, discountForUser);
 	}

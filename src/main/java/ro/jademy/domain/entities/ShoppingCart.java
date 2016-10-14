@@ -5,6 +5,10 @@
  */
 package ro.jademy.domain.entities;
 
+import static ro.jademy.domain.entities.AgeCategory.CHILDREN;
+import static ro.jademy.domain.entities.PriceCategory.INFREQUENT_SALE;
+import static ro.jademy.domain.entities.PriceCategory.NEW_RELEASE;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.NumberFormat;
@@ -49,6 +53,42 @@ public class ShoppingCart {
 			totalItems += cartItem.getQuantity();
 		}
 		return NumberFormat.getNumberInstance(Locale.US).format(totalItems);
+	}
+
+	public double getAmountForPriceCategory(PriceCategory priceCategory) {
+		double suma = 0;
+		for (CartItem cartItem : cartItems) {
+			if (cartItem.getMedia().getPriceCategory() == priceCategory) {
+				suma+=cartItem.getTotalPrice();
+			}
+		}
+		return suma;	
+	}
+
+	public int getCountForAgeCategory(AgeCategory ageCategory) {
+		int suma = 0;
+		for (CartItem cartItem : cartItems) {
+			if (cartItem.getMedia().getAgeCategory() == ageCategory) {
+				suma+=cartItem.getQuantity();
+			}
+		}
+		return suma;
+	}
+
+	public int getLoyaltyPointsForMediaCategories() {
+		double amount = getAmountForPriceCategory(NEW_RELEASE);
+		if (amount>5) {
+			return 2;
+		}
+		amount = getAmountForPriceCategory(INFREQUENT_SALE);
+		if (amount>0) {
+			return 3;
+		}
+		int count = getCountForAgeCategory(CHILDREN);
+		if (count>1) {
+			return 3;
+		}
+		return 1;
 	}
 	
 }
