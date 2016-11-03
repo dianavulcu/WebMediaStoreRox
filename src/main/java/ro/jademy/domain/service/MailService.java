@@ -39,7 +39,7 @@ public class MailService {
 			MimeMessage mail = javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(mail, true);
 			helper.setTo(user.getEmailAddress());
-			helper.setSubject(user.getUsername() + ", welcome to roxmediastore :)");
+			helper.setSubject(user.getUsername() + ", welcome to MediaStore :)");
 			Map model = new HashMap<>();
 			model.put("user", user);
 

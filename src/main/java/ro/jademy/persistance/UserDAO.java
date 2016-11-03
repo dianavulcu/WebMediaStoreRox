@@ -9,14 +9,15 @@ public interface UserDAO {
 
 	User getUserByUsername(String username);
 
+	User getUserByUuid(String uuid);
+
+	User getUserByRememberMeId(String value);
+
 	void createUser(User user);
 
 	void updateUser(User user);
 
-	User getUserByUuid(String uuid);
-
 	List<ShoppingCart> getShoppingCartsByUser(User currentUser);
 
-	User getUserByRememberMeId(String value);
 
 }

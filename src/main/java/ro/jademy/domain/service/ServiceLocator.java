@@ -3,9 +3,7 @@ package ro.jademy.domain.service;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 import org.springframework.beans.factory.annotation.Value;
-
 import org.springframework.stereotype.Service;
-
 import ro.jademy.persistance.UserDAO;
 import ro.jademy.persistance.UserDAOInvocationHandler;
 import ro.jademy.persistance.UserPropDAO;

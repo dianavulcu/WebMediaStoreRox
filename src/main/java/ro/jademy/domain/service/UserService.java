@@ -7,12 +7,9 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static ro.jademy.domain.entities.PriceCategory.*;
-import static ro.jademy.domain.entities.AgeCategory.*;
 import ro.jademy.domain.entities.ShoppingCart;
 import ro.jademy.domain.entities.User;
 import ro.jademy.domain.entities.UserType;
-import ro.jademy.persistance.UserDBDAO;
 
 @Service
 public class UserService {
@@ -21,6 +18,10 @@ public class UserService {
 	private ServiceLocator serviceLocator;
 
 	void setMockServiceLocator(ServiceLocator serviceLocator) {
+		this.serviceLocator = serviceLocator;
+	}
+
+	void setServiceLocator(ServiceLocator serviceLocator) {
 		this.serviceLocator = serviceLocator;
 	}
 
@@ -40,8 +41,12 @@ public class UserService {
 		return serviceLocator.getUserDao().getUserByUsername(username);
 	}
 
-	void setServiceLocator(ServiceLocator serviceLocator) {
-		this.serviceLocator = serviceLocator;
+	public User getUserByUuid(String uuid) {
+		return serviceLocator.getUserDao().getUserByUuid(uuid);
+	}
+	
+	public User getUserByRememberMeId(String value) {
+		return serviceLocator.getUserDao().getUserByRememberMeId(value);
 	}
 
 	public User saveUser(User user) {
@@ -56,9 +61,6 @@ public class UserService {
 		serviceLocator.getUserDao().updateUser(user);
 	}
 
-	public User getUserByUuid(String uuid) {
-		return serviceLocator.getUserDao().getUserByUuid(uuid);
-	}
 
 	public void updateUserPassword(User user, String password) {
 		user.setPassword(password);
@@ -79,9 +81,6 @@ public class UserService {
 		return serviceLocator.getUserDao().getShoppingCartsByUser(currentUser);
 	}
 
-	public User getUserByRememberMeId(String value) {
-		return serviceLocator.getUserDao().getUserByRememberMeId(value);
-	}
 
 	public int getLoyaltyPointsForUser(User user) {
 		List<ShoppingCart> shoppingCarts = serviceLocator.getUserDao().getShoppingCartsByUser(user);

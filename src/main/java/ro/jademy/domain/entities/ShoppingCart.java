@@ -9,7 +9,6 @@ import static ro.jademy.domain.entities.AgeCategory.CHILDREN;
 import static ro.jademy.domain.entities.PriceCategory.INFREQUENT_SALE;
 import static ro.jademy.domain.entities.PriceCategory.NEW_RELEASE;
 
-import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.NumberFormat;
 import java.util.ArrayList;

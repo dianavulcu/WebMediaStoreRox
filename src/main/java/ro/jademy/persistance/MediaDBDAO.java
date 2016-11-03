@@ -50,7 +50,7 @@ public class MediaDBDAO {
 	public static MediaDBDAO getInstance() {
 		return soleInstance;
 	}
-	
+
 	public List<Media> getMediaByQuery(PreparedStatement statement) throws SQLException {
 		ResultSet resultSet = statement.executeQuery();
 		List<Media> aList = new ArrayList<>();
@@ -79,8 +79,7 @@ public class MediaDBDAO {
 			case EBOOK:
 				media = new EBOOK();
 				String author = resultSet.getString("author");
-				media = new EBOOK.Builder().title(title).author(author).price(price).code(code).genre(genre)
-						.build();
+				media = new EBOOK.Builder().title(title).author(author).price(price).code(code).genre(genre).build();
 				break;
 			}
 			media.setAgeCategory(ageCategory);
@@ -89,13 +88,13 @@ public class MediaDBDAO {
 		}
 		return aList;
 	}
-	
+
 	public List<Media> getMediaByProductType(ProductType productType) {
 		try (Connection connection = ConnectionManager.getConnection()) {
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM  MEDIA WHERE PRODUCT_TYPE = ?");
 			statement.setString(1, productType.name());
 			return getMediaByQuery(statement);
-			
+
 		} catch (SQLException e) {
 			throw new RuntimeException("Cannot connect to db", e);
 		}
@@ -105,15 +104,12 @@ public class MediaDBDAO {
 		try (Connection connection = ConnectionManager.getConnection()) {
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM MEDIA WHERE CODE = ?");
 			statement.setString(1, productCode);
-			
+
 			List<Media> media = getMediaByQuery(statement);
-			if(media.size() != 1) {
-				throw new IllegalStateException("Multiple media with same code: " +productCode);
+			if (media.size() != 1) {
+				throw new IllegalStateException("Multiple media with same code: " + productCode);
 			}
-			
 			return media.get(0);
-			
-			
 		} catch (SQLException e) {
 			throw new RuntimeException("Cannot connect to db", e);
 		}

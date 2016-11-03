@@ -2,7 +2,6 @@ package ro.jademy.persistance;
 
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +18,6 @@ import ro.jademy.domain.entities.MediaGenre;
 import ro.jademy.domain.entities.ProductType;
 import ro.jademy.domain.entities.ShoppingCart;
 import ro.jademy.domain.entities.User;
-import ro.jademy.domain.entities.UserType;
 
 @Repository
 public class ShoppingCartDBDAO {

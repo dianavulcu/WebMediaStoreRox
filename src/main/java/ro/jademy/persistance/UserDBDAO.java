@@ -21,7 +21,6 @@ import ro.jademy.domain.entities.UserType;
 
 public class UserDBDAO implements UserDAO {
 
-	// private Properties importFile;
 	private Connection connection;
 	private static UserDBDAO soleInstance = new UserDBDAO();
 
