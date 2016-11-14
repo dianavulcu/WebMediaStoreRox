@@ -25,9 +25,9 @@ public class CartController {
 	@RequestMapping("/addProductToCart")
 	public ModelAndView addProductToCart(String productCode, int cantitate, ProductType productType,
 			HttpServletRequest request) {
+		
 		if (cantitate == 0) {
-			ModelAndView mv = new ModelAndView("redirect:productList/" + productType.toString());
-			return mv;
+			return new ModelAndView("redirect:productList/" + productType.toString());
 		}
 
 		Media media = mediaService.getProductByProductTypeAndCode(productType, productCode);
@@ -38,9 +38,24 @@ public class CartController {
 		}
 
 		shoppingCart.addToCart(media, cantitate);
-		ModelAndView mv = new ModelAndView("redirect:productList/" + productType.toString());
-		return mv;
+		return new ModelAndView("redirect:productList/" + productType.toString());
+	}
 
+	@RequestMapping("/removeProductFromCart")
+	public ModelAndView removeProductFromCart(String productCode, HttpServletRequest request) {
+		
+		if (productCode == null) {
+			return new ModelAndView("redirect:displayCart");	
+		}
+		
+		ShoppingCart shoppingCart = (ShoppingCart) request.getSession().getAttribute("shoppingCart");
+		if (shoppingCart == null) {
+			shoppingCart = new ShoppingCart();
+			request.getSession().setAttribute("shoppingCart", shoppingCart);
+		}
+		
+		shoppingCart.removeFromCartByProductCode(productCode);
+		return new ModelAndView("redirect:displayCart");
 	}
 
 	@RequestMapping("/displayCart")

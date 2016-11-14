@@ -86,7 +86,7 @@
 							<div class="col-xs-2">
 								<div class="form-group">
 									<input class="btn btn-primary" type="submit"
-										value="Adauga in cos" />
+										value="Adaugă in coș" />
 								</div>
 							</div>
 						</div>

@@ -46,7 +46,7 @@
 		<div class="jumbotron">
 			<div class="bs-example">
 				<div class="row">
-					<div class="col-xs-2">POZITIE</div>
+					<div class="col-xs-1">POZITIE</div>
 					<div class="col-xs-2">TITLU</div>
 					<div class="col-xs-2">DESCRIERE</div>
 					<div class="col-xs-2">CANTITATE(BUC.)</div>
@@ -54,16 +54,25 @@
 				</div>
 				<c:forEach items="${shoppingCart.cartItems}" var="cartItem"
 					varStatus="status">
+					<form action="/removeProductFromCart" method="post">
 					<div class="row">
-						<div class="col-xs-2">${status.index+1}</div>
+						<div class="col-xs-1">${status.index+1}</div>
 						<div class="col-xs-2">${cartItem.media.title}</div>
 						<div class="col-xs-2">${cartItem.media.description}</div>
 						<div class="col-xs-2">${cartItem.quantity}</div>
 						<div class="col-xs-2">
 							<fmt:formatNumber value="${cartItem.totalPrice}" type="number"
 								minFractionDigits="2" maxFractionDigits="2" />
+						</div>		
+						<div class="col-xs-2">
+							<div class="form-group">
+									<input class="btn btn-primary" type="submit"
+										value="Scoate din coș" />
+							</div>									
 						</div>
 					</div>
+					<input type="hidden" value="${cartItem.media.code}" name="productCode" />
+					</form>
 				</c:forEach>
 				<h6>
 					TOTAL:

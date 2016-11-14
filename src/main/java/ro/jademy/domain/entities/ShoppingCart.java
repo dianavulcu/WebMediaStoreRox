@@ -23,7 +23,11 @@ public class ShoppingCart {
 		return Collections.unmodifiableList(cartItems);
 	}
 
-	public void addToCart(CartItem cartItem) {
+	public void addToCart(Media media, int quantity) {
+		addToCart(new CartItem(media, quantity));
+	}
+
+	private void addToCart(CartItem cartItem) {
 		for (CartItem cartItemList : cartItems) {
 			if (cartItem.getMedia().getCode().equals(cartItemList.getMedia().getCode())) {
 				cartItemList.setQuantity(cartItemList.getQuantity() + cartItem.getQuantity());
@@ -31,6 +35,19 @@ public class ShoppingCart {
 			}
 		}
 		cartItems.add(cartItem);
+	}
+
+	public void removeFromCartByProductCode(String productCode) {
+		CartItem removeCart = null;
+		for (CartItem cartItemList : cartItems) {
+			if (productCode.equals(cartItemList.getMedia().getCode())) {
+				removeCart = cartItemList;
+				break;
+			}
+		}	
+		if (removeCart!=null) {
+			cartItems.remove(removeCart);
+		}
 	}
 
 	public double getTotalPrice() {
@@ -42,9 +59,6 @@ public class ShoppingCart {
 		return price;
 	}
 
-	public void addToCart(Media media, int quantity) {
-		addToCart(new CartItem(media, quantity));
-	}
 
 	public String getTotalItems() {
 		int totalItems = 0;
@@ -89,5 +103,6 @@ public class ShoppingCart {
 		}
 		return 1;
 	}
+
 	
 }
