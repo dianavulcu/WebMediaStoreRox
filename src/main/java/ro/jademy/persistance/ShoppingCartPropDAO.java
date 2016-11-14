@@ -17,7 +17,7 @@ import ro.jademy.domain.entities.ShoppingCart;
 import ro.jademy.domain.entities.User;
 
 @Repository
-public class ShoppingCartPropDAO {
+public class ShoppingCartPropDAO implements ShoppingCartDAO {
 
 	private Properties importFile;
 	private static ShoppingCartPropDAO soleInstance = new ShoppingCartPropDAO();
@@ -77,6 +77,12 @@ public class ShoppingCartPropDAO {
 			}
 			i++;
 		}
+	}
+
+	@Override
+	public ShoppingCart getShoppingCart(long savedCartId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

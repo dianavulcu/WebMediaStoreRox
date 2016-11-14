@@ -11,6 +11,11 @@ package ro.jademy.domain.service;
  */
 public abstract class MediaStoreException extends RuntimeException{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public MediaStoreException(String message) {
 		super(message);
 	}

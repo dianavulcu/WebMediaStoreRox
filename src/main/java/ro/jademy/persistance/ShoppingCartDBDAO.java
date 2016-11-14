@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.springframework.stereotype.Repository;
-
 import ro.jademy.domain.entities.CD;
 import ro.jademy.domain.entities.CartItem;
 import ro.jademy.domain.entities.DVD;
@@ -19,12 +17,15 @@ import ro.jademy.domain.entities.ProductType;
 import ro.jademy.domain.entities.ShoppingCart;
 import ro.jademy.domain.entities.User;
 
-@Repository
-public class ShoppingCartDBDAO {
+public class ShoppingCartDBDAO implements ShoppingCartDAO {
 
-	Connection connection = ConnectionManager.getConnection();
+	private Connection connection;
 	private static ShoppingCartDBDAO soleInstance = new ShoppingCartDBDAO();
 
+	private ShoppingCartDBDAO() {
+		
+	}
+	
 	public static ShoppingCartDBDAO getInstance() {
 		return soleInstance;
 	}

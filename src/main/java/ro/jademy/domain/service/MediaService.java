@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import ro.jademy.domain.entities.Media;
 import ro.jademy.domain.entities.ProductType;
-import ro.jademy.persistance.MediaDAO;
 import ro.jademy.persistance.MediaDBDAO;
 
 @Service

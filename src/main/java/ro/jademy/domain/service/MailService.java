@@ -19,6 +19,8 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 import ro.jademy.domain.entities.ShoppingCart;
 import ro.jademy.domain.entities.User;
 
+@SuppressWarnings("deprecation")
+
 @Service
 public class MailService {
 

@@ -10,6 +10,10 @@ package ro.jademy.domain.service;
  * @author mihai
  */
 public class MailNotificationException extends MediaStoreException{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public MailNotificationException(String message) {
 		super(message);
 	}
